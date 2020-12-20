@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="plugin/vue.min.js"></script>
+<script type="text/javascript" src="plugin/axios.min.js"></script>
+<!-- 引入组件库 -->
+<script type="text/javascript" src="plugin/elementui.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="plugin/elementui.css">
+    <style>
+        body > .el-container {
+            font-family: "微软雅黑 Light";
+        }
+
+        .el-header {
+            background-color: #409EFF;
+            color: black;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .el-main {
+            background-color: #F2F6FC;
+            color: #000000;
+            text-align: center;
+        }
+
+        .el-footer {
+            background-color: #EBEEF5;
+            color: #000000;
+            text-align: center;
+            padding-top: 20px;
+            font-size: 14px;
+        }
+
+        .info {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .bottom {
+            margin-top: 13px;
+            line-height: 12px;
+        }
+
+        .button {
+            padding: 0;
+            float: right;
+        }
+
+        .image {
+            width: 100%;
+            height: 200px;
+            display: block;
+        }
+        .el-aside {
+            background-color: #D3DCE6;
+            color: #333;
+            text-align: center;
+            line-height: 200px;
+        }
+        .el-form-item{
+            flex-grow: 1;
+            margin: 0px 0px 5px 0px; /*设置元素跟其他元素的距离为20像素*/
+            background-color:#b3d8ff;
+            justify-content: center;
+            height: 100px;
+        }
+        .el-link{
+            color: #5bc0de;
+        }
+        .el-checkbox{
+            margin-left: 50px;
+        }
+        .alayout
+        {
+            width: 1900px;
+            height: 570px;
+            display: flex;
+            background-color:#b3d8ff;
+        }
+        #register
+        {
+            padding: 25px;
+            position: absolute;
+            height: 1900px;
+            right: 0px;
+            left: 400px;
+            display: flex;
+        }
+        #mydiv_img {
+            height: 570px;
+            width:900px;
+            position: absolute;
+            left: 0px;
+            background-image: url("picture/photo.jpg");
+        }
+    </style>
+</head>
+<body>
+
+<div id="layout" style="width:100%; display:block; margin:0 auto;">
+    <el-container>
+
+        <el-header style="height:80px;">
+            <span style="font-family: 华文行楷; font-size: 42px;">垃圾分类</span> 问卷系统
+        </el-header>
+        <el-menu default-active="0" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="0">用户登录</el-menu-item>
+            <el-menu-item index="1">
+                <el-link href="index.html" target="_blank">用户练习</el-link>
+            </el-menu-item>
+            <el-menu-item index="2">
+                <el-link href="index.html" target="_blank">查看结果</el-link>
+            </el-menu-item>
+            <el-menu-item index="3">
+                <el-link href="index.html" target="_blank">问卷答题</el-link>
+            </el-menu-item>
+            <el-menu-item index="4">
+                <el-link href="index.html" target="_blank">后台管理</el-link>
+            </el-menu-item>
+        </el-menu>
+    </el-container>
+</div>
+    <div class="alayout">
+            <div  id="mydiv_img">
+            </div>
+            <div id="register" style="width:100%; display:block; height: 900px">
+                  <div id="login" style="width:400px; display:block; margin:0 auto;">
+                    <div style="text-align: center; margin-bottom: 20px">
+                        <el-link type = "primary" href="pages/register.html" target="_blank">
+                        <h3>欢迎登录</h3>
+                            用户注册
+                        </el-link>
+                    </div>
+                <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
+                    <el-form-item  label="登录账号" prop="userPhone">
+                        <el-input v-model="loginForm.userPhone" placeholder="登录账号/手机号码/电子邮箱"></el-input>
+                    </el-form-item>
+                    <el-form-item label="登录密码" prop="userPwd">
+                        <el-input type="password" v-model="loginForm.userPwd" placeholder="密码由数字字母共同组成，长度为8-16位" autocomplete="off"></el-input>
+<!--                        autocomplete 自动完成允许浏览器预测对字段的输入。当用户在字段开始键入时，浏览器基于之前键入过的值，应该显示出在字段中填写的选项-->
+                    </el-form-item>
+                    <el-form-item label="验证码" prop="userCode">
+                        <el-input style = "margin-bottom: 20px" v-model="loginForm.userCode"   placeholder="请输入验证码"></el-input>
+                        <img style = "margin-left: 20px" src="./CodeServlet"  id = "imageCode" alt="验证码失效" onclick="changeCode(this)">
+                    </el-form-item>
+                    <el-form-item style="margin-top: 20px; margin-left: 30px">
+                        <el-checkbox  v-model="loginForm.checkAll" >是否为管理员</el-checkbox>
+                        <br>
+                        <el-button type="primary" @click="submitForm('loginForm')" round >登录</el-button>
+                        <el-button @click="resetForm('loginForm')" style = "margin-left: 50px" round>重置</el-button>
+
+                    </el-form-item>
+                </el-form>
+            </div>
+            </div>
+    </div>
+
+
+<script type="text/javascript">
+    function changeCode(obj){
+        document.getElementById("imageCode").src = "../CodeServlet?" + new Date().getTime();
+    }
+</script>
+<script type="text/javascript">
+    new Vue({
+        el: '#login',
+        data: function () {
+            let validatePwd = function (rule, value, callback) {
+                let strRegExp = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{8,16}$/;
+                if (!strRegExp.test(value)) {
+                    callback(new Error('密码由数字和字母共同组成，且长度为8-16位'));
+                } else {
+                    callback();
+                }
+            };
+            return {
+                loginForm: {
+                    userPhone: '',
+                    userPwd: '',
+                    userCode:'',
+                    fullscreenLoading: false,
+                    checkall:false
+                },
+                rules: {
+                    userPhone: [
+                        {required: true, message: '请输入登录账号', trigger: 'blur'},
+                        {min: 11, max: 11, message: '请输入正确的登录账号', trigger: 'blur'}
+                    ],
+                    userPwd: [
+                        {required: true, message: '请输入登录密码', trigger: 'blur'},
+                        {validator: validatePwd, trigger: 'blur'}
+                    ],
+                    userCode:[
+                        {required: true, message: '请输入验证码', trigger: 'blur'},
+                    ]
+
+                }
+            };
+        },
+        methods: {
+            submitForm: function (formName) {
+                let _this = this;
+                this.$refs[formName].validate(function (valid) {
+                    if (valid) {
+                        let postData = "{'userPhone': '" + _this.loginForm.userPhone + "', 'userPwd': '" + _this.loginForm.userPwd + "', 'userCode':'" + _this.loginForm.userCode + "'}";
+                        axios.post('./LoginServlet', postData).then(function (response) {
+                            console.log(response)
+                            let data = response.data;
+                            this.fullscreenLoading = true;
+                            setTimeout(() => {
+                                this.fullscreenLoading = false;
+                            }, 2000);
+                            if (data.resultMsg === "Success") {
+                                alert("登录成功");
+                                window.open('pages/game1.html');
+                            }else if(data.resultMsg === "Yzmfailed"){
+                                alert("验证码错误!");
+                            }else{
+                                alert("登录失败用户名不存在，请注册！");
+                                window.open('pages/register.html');
+                            }
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            resetForm: function (formName) {
+                this.$refs[formName].resetFields();
+            }
+        }
+    })
+</script>
+</body>
+</html>
+<script type="text/javascript">
+    new Vue({
+        el: '#layout',
+        data: {
+            //这里应修改为从后台获取json格式数据
+            jsonArray: [{"designLevel": "一等奖", "garbageImage": "./images/garbage1.jpg"},
+                {"designLevel": "二等奖", "garbageImage": "./images/garbage2.jpg"},
+                {"designLevel": "二等奖", "garbageImage": "./images/garbage3.jpg"},
+                {"designLevel": "三等奖", "garbageImage": "./images/garbage4.jpg"},
+                {"designLevel": "三等奖", "garbageImage": "./images/garbage5.jpg"},
+                {"designLevel": "三等奖", "garbageImage": "./images/garbage6.jpg"}],
+        },
+        methods: {
+            handleSelect: function (key, keyPath) {
+                console.log(key, keyPath);
+                //self.$router.push("/register.html");
+            }
+        }
+    })
+</script>
+</body>
+</html>

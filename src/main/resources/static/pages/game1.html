@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>郑明辉作业</title>
+    <meta charset="utf-8"/>
+
+    <style type="text/css">
+        .text-wrapper {
+            white-space: pre-wrap;
+        }
+        a:link {
+            font: bold 19px 微软雅黑;
+            color: #5cb85c;
+            text-decoration: none;
+            background: #eee;
+        }
+
+        a:visited {
+            font: bold 19px 微软雅黑;
+            color: #5cb85c;
+            text-decoration: none;
+            background: #eee;
+        }
+        a:hover {
+            font: bold 19px 微软雅黑;
+            color: #5cb85c;
+            text-decoration: none;
+            background: #eee;
+        }
+        a:active {
+            font: bold 19px 微软雅黑;
+            color: green;
+            text-decoration: none;
+            background: #eee;
+        }
+        .Container {
+            width: 94%;
+            margin: 1px auto;
+            display: flex;
+            box-sizing: border-box;
+            flex-direction: column;
+            height: 90%;
+
+        }
+        .photo
+        {
+            height: 170px;
+        }
+        .input{
+            color:black;
+            font-size: 30px;/*font 简写属性在一个声明中设置所有字体属性。*/
+            width: 100%;
+            height: 100%;
+            border: white;
+            cursor: hand;
+            text-align: center;
+        }
+        .butt{
+            width: 100%;
+            font-size: 25px;
+            color:blue;
+            padding: 10px 20px;
+            text-align: right;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .resultag
+        {
+            color:black;
+            font-size: 30px;/*font 简写属性在一个声明中设置所有字体属性。*/
+            width: 100%;
+            height: 100%;
+            border: white;
+            cursor: hand;
+            text-align: center;
+
+        }
+        #Header{
+            height: 80px;
+            flex: 0 0 auto;
+            text-align:right;
+            border-radius: 10px;
+        }
+        #Header h1{
+            width: 80%;
+            margin: 0 auto;
+        }
+        #restag
+        {
+            color:black;
+            font-size: 30px;/*font 简写属性在一个声明中设置所有字体属性。*/
+            width: 100%;
+            height: 100%;
+            border: white;
+            cursor: hand;
+            text-align: center;
+
+        }
+        #Footer {
+            height: 40px;
+            padding-top: 15px;
+            background:white;
+        }
+        #Content-Main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            /* border: 3px rgb(41, 18, 95) solid;  */
+            box-shadow: rgb(0, 0, 0) 2px 2px 4px 1px;
+            background-color: white;
+            border-radius: 10px;
+            max-width: 1200px;
+            margin: 10px auto;
+            background-image: url("picture/back.jfif");
+            /*margin: 5px 30px 5px 35px; 设置元素跟其他元素的距离为20像素*/
+            /* background: #337ab7; */
+        }
+        .row_begin{
+            width: 99%;
+            height: 50px;
+            display: flex;
+            text-align: center;
+            justify-content: center; /* 水平居中 */
+            align-items: center;    /* 垂直居中 */
+            border: blanchedalmond 1px solid;
+            border-radius: 10px;
+
+        }
+
+        .row{
+            width: 99%;
+            height: 33%;
+            display: flex;
+            margin-left:-2px;
+            margin-right: -2px;
+            margin: 5px auto;
+
+        }
+        .rowspan2{
+            width: 99%;
+            display: flex;
+            text-align: center;
+            justify-content: center; /* 水平居中 */
+            align-items: center;    /* 垂直居中 */
+            border: blanchedalmond 1px solid;
+            border-radius: 10px;
+        }
+        .rowspan3{
+            width: 99%;
+            height: 150px;
+            display: flex;
+            text-align: center;
+            justify-content: center; /* 水平居中 */
+            align-items: center;    /* 垂直居中 */
+            border: blanchedalmond 1px solid;
+            border-radius: 10px;
+        }
+        .Container {
+            width: 94%;
+            margin: 1px auto;
+            display: flex;
+            box-sizing: border-box;
+            flex-direction: column;
+            height: 100%;
+            /* border: 2px palegreen solid; */
+            /* background: #d9534f; */
+        }
+        img{
+            /* border:solid 1px red; */
+            max-width: 80%;
+            max-height: 184px;
+
+            /* background-size:cover; |cover
+            width:90%;
+            height: auto;*/
+        }
+        .total
+        {
+            background-image: url("../picture/back3.jfif");
+            display: flex;
+            height: 800px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="Header">
+    <a href="../3180434038.html" style="margin-right: 1%;border-radius: 7px;">退出登录</a>
+    <h1 style="text-align:center;" >垃圾分类小游戏</h1>
+</div>
+<div class = "total" style="margin-top: 20px">
+
+
+<div class="Container" style="margin-top:  50px" >
+<div id = "garbage" align = "center">
+    <div id = "Content-Main">
+        <div class = "row_begin">
+            <div id="lotterybegin" class="input" style="border:0px;">{{garbageName}}</div>
+        </div>
+        <div class = "row">
+            <div class = "rowspan2">
+                <input class = "butt" type="button" value="开始" @click = "begin()"/>
+            </div>
+            <div  class = "rowspan2">
+                <input class = "butt" type="button" value="结束" @click = "stop()"/>
+            </div>
+        </div>
+
+
+        <div class = "row">
+            <div class = "rowspan3">
+                <div v-if = "handFlag == 1">
+                    <img src="../picture/hand.jpg" >
+                </div>
+                <div v-if = "resultFlag == 1">
+                    <img src="../picture/right.png">
+                </div>
+                <div v-else-if = "resultFlag == -1  && number == 1">
+                    <img src="../picture/wrong.png" >
+                </div>
+            </div>
+            <div class = "rowspan3">
+                <div v-if = "handFlag == 2"> <!--使用if else的条件语句判断 -->
+                    <img src="../picture/hand.jpg">
+                </div>
+                <div v-if = "resultFlag == 2">
+                    <img src="../picture/right.png">
+                </div>
+                <div v-else-if = "resultFlag == -1 && number == 2">
+                    <img src="../picture/wrong.png">
+                </div>
+            </div>
+
+            <div class = "rowspan3">
+                <div v-if = "handFlag == 3"><!--使用if else的条件语句判断 -->
+                    <img src="../picture/hand.jpg">
+                </div>
+                <div v-if = "resultFlag == 3">
+                    <img src="../picture/right.png">
+                </div>
+                <div v-else-if = "resultFlag == -1 && number == 3">
+                    <img src="../picture/wrong.png">
+                </div>
+            </div>
+            <div class = "rowspan3">
+                <div v-if = "handFlag == 4"><!--使用if else的条件语句判断 -->
+                    <img src="../picture/hand.jpg">
+                </div>
+                <div v-if = "resultFlag == 4">
+                    <img src="../picture/right.png">
+                </div>
+                <div v-else-if = "resultFlag == -1 && number == 4">
+                    <img src="../picture/wrong.png">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="rowspan2">
+                <div id = "garbage1" @mouseenter = "enter(1)" @mouseleave = "leave()" @click = "sorting('厨余垃圾',1)">
+                    <img src = "../picture/cylj.png"/>
+                </div>
+            </div>
+            <div class="rowspan2">
+                <div id = "garbage2" @mouseenter = "enter(2)" @mouseleave = "leave()" @click = "sorting('可回收垃圾',2)">
+                    <img src = "../picture/khslj.png"/>
+                </div>
+            </div>
+            <div class="rowspan2">
+                <div id = "garbage3" @mouseenter = "enter(3)" @mouseleave = "leave()" @click = "sorting('其它垃圾',3)">
+                    <img src = "../picture/qtlj.png"/>
+                </div>
+            </div>
+            <div class="rowspan2">
+                <div id = "garbage4" @mouseenter = "enter(4)" @mouseleave = "leave()" @click = "sorting('有害垃圾',4)">
+                    <img src = "../picture/yhlj.png"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id = "restag">用户:{{result}}<br>  玩了{{number}}次<br>  正确次数为{{total}}次<br></div>
+
+    </div>
+
+</div>
+
+    <div style="word-break:break-all" v-html = "result"><br></div>
+</div>
+<div id = "Footer" align = "center">版权所有@ 浙大宁波理工学院计算机求是181</div>
+<script type="text/javascript" src="../plugin/vue.min.js"></script>
+<script type="text/javascript">
+
+   game = new Vue({
+       el: '#garbage',
+       data:
+           {
+
+               handFlag: 0,
+               resultFlag: 0,
+               lotteryNumber: 0,
+               number: 0,
+               lotteryTimer: null,
+                result:"",
+               result:"",
+               number:0,
+               total:0,
+               flag:0,
+               garbageJson:
+
+                   JSON.parse('[\n' +
+                       '  {\n' +
+                       '    "garbageId": 1,\n' +
+                       '    "garbageFlag": "纸类",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "报纸",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 2,\n' +
+                       '    "garbageFlag": "纸类",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "传单",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 3,\n' +
+                       '    "garbageFlag": "纸类",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "杂志",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 4,\n' +
+                       '    "garbageFlag": "纸类",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "旧书",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 5,\n' +
+                       '    "garbageFlag": "纸类",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "纸板箱",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 6,\n' +
+                       '    "garbageFlag": "纸类",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "未受污染的纸制品",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 7,\n' +
+                       '    "garbageFlag": "金属",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "铁制品",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 8,\n' +
+                       '    "garbageFlag": "金属",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "铜制品",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 9,\n' +
+                       '    "garbageFlag": "金属",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "铝制品",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 10,\n' +
+                       '    "garbageFlag": "玻璃",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "玻璃瓶罐",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 11,\n' +
+                       '    "garbageFlag": "玻璃",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "平板玻璃",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 12,\n' +
+                       '    "garbageFlag": "玻璃",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "其他玻璃制品",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 13,\n' +
+                       '    "garbageFlag": "除塑料袋外的塑料制品",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "泡沫塑料",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 14,\n' +
+                       '    "garbageFlag": "除塑料袋外的塑料制品",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "塑料瓶",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 15,\n' +
+                       '    "garbageFlag": "除塑料袋外的塑料制品",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "硬塑料",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 16,\n' +
+                       '    "garbageFlag": "橡胶及橡胶制品",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "橡胶及橡胶制品",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 17,\n' +
+                       '    "garbageFlag": "利乐包装",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "牛奶盒",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 18,\n' +
+                       '    "garbageFlag": "饮料瓶",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "可乐罐",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 19,\n' +
+                       '    "garbageFlag": "饮料瓶",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "塑料饮料瓶",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 20,\n' +
+                       '    "garbageFlag": "饮料瓶",\n' +
+                       '    "garbageInfo": "再生利用",\n' +
+                       '    "garbageName": "啤酒瓶",\n' +
+                       '    "garbageType": "可回收垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 21,\n' +
+                       '    "garbageFlag": "电池",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "蓄电池",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 22,\n' +
+                       '    "garbageFlag": "电池",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "钮扣电池",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 23,\n' +
+                       '    "garbageFlag": "废旧电子产品",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "废旧电子产品",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 24,\n' +
+                       '    "garbageFlag": "废旧灯管灯泡",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "废旧灯管灯泡",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 25,\n' +
+                       '    "garbageFlag": "过期药品",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "过期药品",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 26,\n' +
+                       '    "garbageFlag": "过期日用化妆品",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "过期日用化妆品",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 27,\n' +
+                       '    "garbageFlag": "染发剂",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "染发剂",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 28,\n' +
+                       '    "garbageFlag": "杀虫剂容器",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "杀虫剂容器",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 29,\n' +
+                       '    "garbageFlag": "除草剂容器",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "除草剂容器",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 30,\n' +
+                       '    "garbageFlag": "废弃水银温度计",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "废弃水银温度计",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 31,\n' +
+                       '    "garbageFlag": "废油漆桶",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "废油漆桶",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 32,\n' +
+                       '    "garbageFlag": "废打印机墨盒",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "废打印机墨盒",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 33,\n' +
+                       '    "garbageFlag": "硒鼓",\n' +
+                       '    "garbageInfo": "安全填埋、焚烧",\n' +
+                       '    "garbageName": "硒鼓",\n' +
+                       '    "garbageType": "有害垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 34,\n' +
+                       '    "garbageFlag": "食物残余",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "剩菜剩饭",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 35,\n' +
+                       '    "garbageFlag": "食物残余",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "西餐糕点",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 36,\n' +
+                       '    "garbageFlag": "菜梗菜叶",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "菜梗菜叶",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 37,\n' +
+                       '    "garbageFlag": "动物骨骼内脏",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "动物骨骼内脏",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 38,\n' +
+                       '    "garbageFlag": "茶叶渣",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "茶叶渣",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 39,\n' +
+                       '    "garbageFlag": "水果残余",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "水果残余",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 40,\n' +
+                       '    "garbageFlag": "果壳瓜皮",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "果壳瓜皮",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 41,\n' +
+                       '    "garbageFlag": "盆景等植物",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "残枝落叶",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 42,\n' +
+                       '    "garbageFlag": "废弃食用油",\n' +
+                       '    "garbageInfo": "堆肥、制作饲料",\n' +
+                       '    "garbageName": "废弃食用油",\n' +
+                       '    "garbageType": "厨余垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 43,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "纸杯",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 44,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "照片",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 45,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "复写纸",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 46,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "压敏纸",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 47,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "收据用纸",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 48,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "明星片",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 49,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "相册",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 50,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "卫生纸",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 51,\n' +
+                       '    "garbageFlag": "受污染与无法再生的纸张",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "尿片",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 52,\n' +
+                       '    "garbageFlag": "受污染或其他不可回收的玻璃",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "受污染或其他不可回收的玻璃",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 53,\n' +
+                       '    "garbageFlag": "塑料袋与其他受污染的塑料制品",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "塑料袋与其他受污染的塑料制品",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 54,\n' +
+                       '    "garbageFlag": "废旧衣物与其他纺织品",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "废旧衣物与其他纺织品",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 55,\n' +
+                       '    "garbageFlag": "破旧陶瓷品",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "破旧陶瓷品",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 56,\n' +
+                       '    "garbageFlag": "妇女卫生用品",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "妇女卫生用品",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 57,\n' +
+                       '    "garbageFlag": "一次性餐具",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "一次性餐具",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 58,\n' +
+                       '    "garbageFlag": "贝壳",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "贝壳",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 59,\n' +
+                       '    "garbageFlag": "烟头",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "烟头",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  },\n' +
+                       '  {\n' +
+                       '    "garbageId": 60,\n' +
+                       '    "garbageFlag": "灰土",\n' +
+                       '    "garbageInfo": "可燃部分焚烧发电，不可燃部分卫生填埋",\n' +
+                       '    "garbageName": "灰土",\n' +
+                       '    "garbageType": "其它垃圾"\n' +
+                       '  }\n' +
+                       ']\n'
+                   ),
+               garbageName: '点击开始按钮开始游戏'
+           },
+       mounted: function () {
+
+       },
+       methods: {
+           enter: function (num) {
+               this.handFlag = num;
+           },
+           leave: function () {
+               this.handFlag = 0;
+           },
+           sorting: function (Type, num) {
+               if(this.garbageName != '点击开始按钮开始游戏' && this.flag == 0)
+               {
+                   if (this.garbageJson[this.lotteryNumber].garbageType == Type) {
+                       let nowlogin = localStorage.getItem('user');
+                       this.number++;
+                       this.total++;
+                       this.result  = nowlogin ;
+                       this.resultFlag = num;
+                       this.flag = 1;
+                   } else {
+                       this.resultFlag = -1;
+                       let nowlogin = localStorage.getItem('user');
+                       this.result  = nowlogin;
+                       this.number++;
+                       alert(this.garbageJson[this.lotteryNumber].garbageType);
+                       this.flag = 1;
+                   }
+               }
+               else
+               {
+                   alert("请不要重复选择 不会计入总分! 请重新开始");
+               }
+
+           },
+           lottery:function(){
+               this.lotteryNumber = Math.floor(Math.random() * 60);
+               this.garbageName = this.garbageJson[this.lotteryNumber].garbageName;
+           },
+           begin: function () {
+               this.resultFlag = 0;
+               this.flag = 0;
+               if(!this.lotteryTimer){
+                   this.lotteryTimer = setInterval(this.lottery, 500);
+               }
+           },
+           stop: function () {
+               clearInterval(this.lotteryTimer);
+               this.lotteryTimer = null;
+           }
+       }
+   });
+
+
+
+
+</script>
+</body>
+</html>
