@@ -4,7 +4,7 @@ import com.nit.ssm.dto.SortDTO;
 import com.nit.ssm.dto.TableReqDTO;
 import com.nit.ssm.dto.TableRspDTO;
 
-
+//用途：业务service层，给controller层的类提供接口进行调用。一般就是自己写的方法封装起来，就是声明一下，具体实现在serviceImpl中。
 public interface SortService {
     /**
      * @Description: 获取表格数据

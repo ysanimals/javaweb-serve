@@ -1,4 +1,4 @@
-package com.nit.ssm.login;
+package com.nit.ssm.utils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 

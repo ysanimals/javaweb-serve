@@ -5,7 +5,8 @@ import com.nit.ssm.entity.SortEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+//用途： 对数据库进行数据持久化操作，他的方法语句是直接针对数据库操作的，主要实现一些增删改查操作，在mybatis中方法主要与与xxx.xml内相互一一映射。
+//数据持久层
 public interface SortMapper {
     /**
      * @Description: 获取表格数据

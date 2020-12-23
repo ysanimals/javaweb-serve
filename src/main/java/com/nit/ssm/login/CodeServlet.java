@@ -1,6 +1,5 @@
 package com.nit.ssm.login;
 
-import com.nit.ssm.login.MD5Util;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;

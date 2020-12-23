@@ -1,4 +1,6 @@
 package com.nit.ssm.entity;
+//用途： 实体层，用于存放我们的实体类，与数据库中的属性值基本保持一致，实现set和get的方法。
+//数据传输层
 
 public class SortEntity {
     private Integer sortId;
