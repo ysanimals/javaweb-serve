@@ -2,30 +2,30 @@ package com.nit.ssm.dto;
 
 public class OpResultDTO {
 
-    private Integer intResult;
-    private Object objResult;
+    private String message;
+    private Object result;
 
     public OpResultDTO() {
     }
 
-    public OpResultDTO(Integer intResult, Object objResult) {
-        this.intResult = intResult;
-        this.objResult = objResult;
+    public OpResultDTO(String message, Object result) {
+        this.message = message;
+        this.result = result;
     }
 
-    public Integer getIntResult() {
-        return intResult;
+    public String getMessage() {
+        return message;
     }
 
-    public void setIntResult(Integer intResult) {
-        this.intResult = intResult;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public Object getObjResult() {
-        return objResult;
+    public Object getResult() {
+        return result;
     }
 
-    public void setObjResult(Object objResult) {
-        this.objResult = objResult;
+    public void setResult(Object result) {
+        this.result = result;
     }
 }

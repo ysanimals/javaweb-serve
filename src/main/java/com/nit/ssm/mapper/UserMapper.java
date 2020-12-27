@@ -61,10 +61,9 @@ public interface UserMapper {
      * @Author: JYX
      * @Date: 2020/12/14 19:04
      */
-    @Select({"SELECT user_id, user_name, user_phone, user_pwd, user_card, " +
-            "user_status, user_type, gmt_create" +
+    @Select("SELECT * " +
             "FROM tb_user " +
-            "WHERE user_name = #{userName} LIMIT 1"})
+            "WHERE user_name = #{userName} LIMIT 1")
     UserDTO getByUserName(@Param("userName") String userName) throws Exception;
 
     /**
@@ -72,8 +71,7 @@ public interface UserMapper {
      * @Author: JYX
      * @Date: 2020/12/14 19:04
      */
-    @Select({"SELECT user_id, user_name, user_phone, user_pwd, user_card, " +
-            "user_status, user_type, gmt_create" +
+    @Select({"SELECT * " +
             "FROM tb_user " +
             "WHERE user_id = #{userId}"})
     UserDTO getByUserId(@Param("userId") Integer userId) throws Exception;

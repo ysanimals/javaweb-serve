@@ -58,9 +58,9 @@ public class FileUpload {
             File file = new File(pathName.toString() + directoryName.toString() + fileName.toString());
             byte[] fileBytes = Base64.getDecoder().decode(imgBase64);
             FileUtils.writeByteArrayToFile(file, fileBytes);
-            opResult.setIntResult(file.hashCode());
+            opResult.setMessage(String.valueOf(file.hashCode()));
             //图片的返回路径需要根据自己的需求自行设置，注意应是相对路径
-            opResult.setObjResult("../api/upload/images/" + directoryName.toString() + fileName.toString());
+            opResult.setResult("../api/upload/images/" + directoryName.toString() + fileName.toString());
         } catch (IOException e) {
             logger.error(e.toString());
         }
@@ -95,8 +95,8 @@ public class FileUpload {
                 }
                 file.transferTo(desFile);
             }
-            opResult.setIntResult(fileName.hashCode());
-            opResult.setObjResult("../upload/accessories/" + directoryName.toString() + fileName.toString());
+            opResult.setMessage(String.valueOf(fileName.hashCode()));
+            opResult.setResult("../upload/accessories/" + directoryName.toString() + fileName.toString());
         } catch (IOException e) {
             logger.error(e.toString());
         }

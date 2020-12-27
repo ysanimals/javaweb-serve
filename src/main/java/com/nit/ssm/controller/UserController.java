@@ -46,15 +46,15 @@ public class UserController {
         try {
             TokenDTO tokenDTO = JWTUtil.verifyToken(token);
             if (token == null) {
-                op.setIntResult(200);
-                op.setObjResult("获取用户信息失败，请重新登录");
+                op.setMessage("200");
+                op.setResult("获取用户信息失败，请重新登录");
             } else {
                 Integer userId = tokenDTO.getUserId();
                 op = userService.getUserInfo(userId);
             }
         } catch (Exception e) {
-            op.setIntResult(200);
-            op.setObjResult("获取用户信息失败");
+            op.setMessage("200");
+            op.setResult("获取用户信息失败");
             System.out.println(e.toString());
         }
         return op;

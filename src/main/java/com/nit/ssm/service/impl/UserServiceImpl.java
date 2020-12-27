@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         OpResultDTO op = new OpResultDTO();
         UserEntity userEntity = mapperFactory.getMapperFacade().map(userDTO, UserEntity.class);
-        op.setObjResult(userMapper.add(userEntity));
+        op.setResult(userMapper.add(userEntity));
         return op;
     }
 
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         userDTO.setUserPwd(null);
         userDTO.setUserId(null);
         userDTO.setKey(null);
-        op.setObjResult(userDTO);
+        op.setResult(userDTO);
         return op;
     }
 }

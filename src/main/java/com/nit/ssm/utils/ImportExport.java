@@ -83,8 +83,8 @@ public class ImportExport {
             // 应该将模板中的数据解析，然后插入到数据库，这里只是返回一个字符串
             importData = importData.substring(0, importData.length() - 1);
             String[] tempValue = importData.split(",");
-            opResult.setIntResult(tempValue.length);
-            opResult.setObjResult(tempValue);
+            opResult.setMessage(String.valueOf(tempValue.length));
+            opResult.setResult(tempValue);
         } catch (Exception e) {
             logger.error(e.toString());
         }

@@ -47,7 +47,7 @@ public class SortController {
     public OpResultDTO update(SortDTO sortDTO) {
         OpResultDTO opResult = new OpResultDTO();
         try {
-            opResult.setIntResult(sortService.edit(sortDTO));
+            opResult.setMessage(sortService.edit(sortDTO).toString());
         } catch (Exception e) {
             logger.error(e.toString());
         }
@@ -63,7 +63,7 @@ public class SortController {
     public OpResultDTO remove(Integer sortId) {
         OpResultDTO opResult = new OpResultDTO();
         try {
-            opResult.setIntResult(sortService.remove(sortId));
+            opResult.setMessage(sortService.remove(sortId).toString());
         } catch (Exception e) {
             logger.error(e.toString());
         }
