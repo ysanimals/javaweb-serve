@@ -37,6 +37,16 @@ public class SortController {
         return tableRspDTO;
     }
 
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public OpResultDTO add(SortDTO sortDTO){
+        OpResultDTO opResult = new OpResultDTO();
+        try{
+            opResult.setMessage(sortService.add(sortDTO).toString());
+        }catch (Exception e){
+            logger.error(e.toString());
+        }
+        return  opResult;
+    }
 
     /**
      * @Description: 编辑记录
