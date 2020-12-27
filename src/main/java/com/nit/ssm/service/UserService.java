@@ -1,64 +1,36 @@
 package com.nit.ssm.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nit.ssm.dto.SortDTO;
 import com.nit.ssm.dto.TableReqDTO;
 import com.nit.ssm.dto.TableRspDTO;
 import com.nit.ssm.dto.UserDTO;
-
+import com.nit.ssm.dto.OpResultDTO;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface UserService {
     /**
-     * @Description: 获取表格数据
-     * @Author: SN
-     * @Date: 2019/11/31 11:02
+     * @Description: 用户登录
+     * @Date: 2020/12/22
      */
-    TableRspDTO list4Table(TableReqDTO tableReqDTO) throws Exception;
+    JSONObject loginCheck(String loginName, String loginPwd, Boolean rememberMe) throws Exception;
 
     /**
-     * @Description: 添加记录
-     * @Author: SN
-     * @Date: 2019/11/31 11:02
+     * @Description: 用户注册
+     * @Date: 2020/12/22
      */
-    Integer add(SortDTO sortDTO) throws Exception;
+    OpResultDTO  register(UserDTO userDTO) throws Exception;
 
     /**
-     * @Description: 编辑记录
-     * @Author: SN
-     * @Date: 2019/11/31 11:02
+     * @Description: 用户名重名检测
+     * @Date: 2020/12/22
      */
-    Integer edit(SortDTO sortDTO) throws Exception;
+    UserDTO checkName(String userName) throws Exception;
 
     /**
-     * @Description: 删除记录
-     * @Author: SN
-     * @Date: 2019/11/31 11:02
+     * @Description: 获取用户信息
+     * @Date: 2020/12/24
      */
-    Integer remove(Integer sortId) throws Exception;
-
-
-
-    /**
-     * @Description: 重置用户密码
-     * @Author: JYX
-     * @Date: 2020/12/14 10:34
-     */
-    Integer resetPwd(Integer userId, String userPwd) throws Exception;
-
-    /**
-     * @Description: 登录验证
-     * @Author: JYX
-     * @Date: 2020/12/14 10:34
-     */
-    UserDTO loginCheck(String userName) throws Exception;
-
-    /**
-     * @Description: 根据UserId获取用户信息
-     * @Author: JYX
-     * @Date: 2020/12/14 10:34
-     */
-    UserDTO getByUserId(Integer userId) throws Exception;
-
-
-    UserDTO login(UserDTO userDTO, HttpSession session);
+    OpResultDTO getUserInfo(Integer userId) throws Exception;
 }

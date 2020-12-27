@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class UserDTO {
+    private Integer key;
     private Integer userId;
     private String userName;
     private String userPwd;
     private Integer userType;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date gmtCreate;
-    private Integer key;
+
 
     public UserDTO() {
     }

@@ -37,21 +37,6 @@ public class SortController {
         return tableRspDTO;
     }
 
-    /**
-     * @Description: 添加记录
-     * @Author: SN
-     * @Date: 2019/11/31 11:02
-     */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public OpResultDTO add(SortDTO sortDTO) {
-        OpResultDTO opResult = new OpResultDTO();
-        try {
-            opResult.setIntResult(sortService.add(sortDTO));
-        } catch (Exception e) {
-            logger.error(e.toString());
-        }
-        return opResult;
-    }
 
     /**
      * @Description: 编辑记录

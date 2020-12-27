@@ -49,3 +49,10 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+application:
+  jwt:
+    # 加密秘钥
+    secret: ADB8E3D5838A0AE8E274014928CE2CEE
+    # token有效时长，60 * 4小时，单位分钟
+    expire: 240
+    sm4Key: 20250902A4591288621A1DC45DF6ACE3
