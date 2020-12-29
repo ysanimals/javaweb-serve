@@ -52,12 +52,53 @@ public interface UserMapper {
             @Param("sortField")String sortField,
             @Param("sortOrder")String sortOrder) throws Exception;
 
+    /**
+     * 查询用户统计信息
+     * @return OpResult
+     */
+    @Select({"<script>SELECT user_id, user_name, user_phone, gmt_create, total, u.right, wrong, " +
+            "(case when total = 0 then 0 when total > 0 then u.right / total end) AS `accuracy`, " +
+            "(total - u.right - wrong) AS `noAnswer`, " +
+            "user_id AS `key` FROM tb_user u " +
+            "WHERE TRUE " +
+            "<if test = 'userName != null'>AND user_name LIKE CONCAT('%', #{userName}, '%') </if>" +
+            "<if test = 'userPhone != null'>AND user_phone LIKE CONCAT('%', #{phone}, '%') </if>" +
+            "ORDER BY " +
+            "<if test = 'sortField != null'>${sortField} ${sortOrder}, </if>" +
+            "total DESC, u.right DESC, user_id " +
+            "LIMIT #{start}, #{length}" +
+            "</script>"})
+    List<UserDTO> statistics(
+            @Param("userName")String userName,
+            @Param("userPhone")String userPhone,
+            @Param("start") Integer start,
+            @Param("length") Integer length,
+            @Param("sortField")String sortField,
+            @Param("sortOrder")String sortOrder) throws Exception;
+
+    /**
+     * 查询用户统计信息
+     * @return OpResult
+     */
+    @Select({"<script>SELECT count(*) from user " +
+            "WHERE TRUE " +
+            "<if test = 'userName != null'>AND user_name LIKE CONCAT('%', #{userName}, '%') </if>" +
+            "<if test = 'userPhone != null'>AND user_phone LIKE CONCAT('%', #{phone}, '%') </if>" +
+            "</script>"})
+    Long countStatistics(
+            @Param("userName")String userName,
+            @Param("phone")String userPhone) throws Exception;
+
+
+
     @Insert("INSERT INTO tb_user " +
-            "(user_name, role_id, user_phone, user_pwd, user_card, user_type, gmt_create) " +
+            "(user_name, role_id, user_phone, user_pwd, user_card, user_type, total, right, wrong, gmt_create) " +
             "VALUES(#{entity.userName}, #{entity.roleId}, #{entity.userPhone}, #{entity.userPwd}, " +
-            "#{entity.userCard}, #{entity.userType}, #{entity.gmtCreate})")
+            "#{entity.userCard}, #{entity.userType}, #{entity.total}, #{entity.right}, " +
+            "#{entity.wrong}, #{entity.gmtCreate})")
     @Options(useGeneratedKeys = true, keyProperty = "userId", keyColumn = "user_id")
     Integer add(@Param("entity") UserEntity entity) throws Exception;
+
 
 
 
@@ -104,4 +145,16 @@ public interface UserMapper {
             "ON a.menu_id = b.menu_id AND b.role_id = #{roleId} " +
             "ORDER BY a.father_id, a.menu_sort ")
     List<MenuDTO> queryRoleMenu(@Param("roleId") Integer roleId) throws Exception;
+
+
+    /**
+     * @Description: 更新统计数据
+     * @Date: 2020/12/29
+     */
+    @Update("UPDATE user u " +
+            "SET u.total = u.total + #{entity.total}, u.right = u.right + #{entity.right}, " +
+            "u.wrong = u.wrong + #{entity.wrong} " +
+            "WHERE user_id = #{entity.userId} LIMIT 1")
+    void updateData(
+            @Param("entity")UserEntity userEntity) throws Exception;
 }

@@ -6,25 +6,36 @@ import java.util.Date;
 
 public class UserDTO {
     private Integer key;
-    private Integer roleId;
     private Integer userId;
     private String userName;
+    private Integer roleId;
+    private String userPhone;
     private String userPwd;
     private Integer userType;
+    private Integer total;
+    private Integer right;
+    private Integer wrong;
+    private Integer noAnswer;
+    private Double accuracy;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date gmtCreate;
-
 
     public UserDTO() {
     }
 
-    public UserDTO(Integer key, Integer roleId, Integer userId, String userName, String userPwd, Integer userType, Date gmtCreate) {
+    public UserDTO(Integer key, Integer userId, String userName, Integer roleId, String userPhone, String userPwd, Integer userType, Integer total, Integer right, Integer wrong, Integer noAnswer, Double accuracy, Date gmtCreate) {
         this.key = key;
-        this.roleId = roleId;
         this.userId = userId;
         this.userName = userName;
+        this.roleId = roleId;
+        this.userPhone = userPhone;
         this.userPwd = userPwd;
         this.userType = userType;
+        this.total = total;
+        this.right = right;
+        this.wrong = wrong;
+        this.noAnswer = noAnswer;
+        this.accuracy = accuracy;
         this.gmtCreate = gmtCreate;
     }
 
@@ -34,14 +45,6 @@ public class UserDTO {
 
     public void setKey(Integer key) {
         this.key = key;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
     }
 
     public Integer getUserId() {
@@ -60,6 +63,22 @@ public class UserDTO {
         this.userName = userName;
     }
 
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
     public String getUserPwd() {
         return userPwd;
     }
@@ -74,6 +93,46 @@ public class UserDTO {
 
     public void setUserType(Integer userType) {
         this.userType = userType;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public Integer getRight() {
+        return right;
+    }
+
+    public void setRight(Integer right) {
+        this.right = right;
+    }
+
+    public Integer getWrong() {
+        return wrong;
+    }
+
+    public void setWrong(Integer wrong) {
+        this.wrong = wrong;
+    }
+
+    public Integer getNoAnswer() {
+        return noAnswer;
+    }
+
+    public void setNoAnswer(Integer noAnswer) {
+        this.noAnswer = noAnswer;
+    }
+
+    public Double getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(Double accuracy) {
+        this.accuracy = accuracy;
     }
 
     public Date getGmtCreate() {

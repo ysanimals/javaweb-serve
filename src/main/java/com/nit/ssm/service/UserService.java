@@ -1,18 +1,15 @@
 package com.nit.ssm.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nit.ssm.dto.SortDTO;
-import com.nit.ssm.dto.TableReqDTO;
-import com.nit.ssm.dto.TableRspDTO;
-import com.nit.ssm.dto.UserDTO;
-import com.nit.ssm.dto.OpResultDTO;
 import com.nit.ssm.dto.*;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface UserService {
+
     /**
      * @Description: 用户登录
      * @Date: 2020/12/22
@@ -48,6 +45,12 @@ public interface UserService {
      * @return OpResult
      */
     TableRspDTO list4Table(@RequestBody TableReqDTO req) throws Exception;
+
+    /**
+     * 查询用户统计信息
+     * @return OpResult
+     */
+    TableRspDTO statistics(@RequestBody TableReqDTO req) throws Exception;
 
     /**
      * 修改用户状态

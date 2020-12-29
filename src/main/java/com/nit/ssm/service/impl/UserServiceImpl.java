@@ -132,6 +132,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public TableRspDTO statistics(@RequestBody TableReqDTO req) throws Exception {
+        String userName = req.parseQueryParam("userName");
+        String userPhone = req.parseQueryParam("phone");
+        Long count = userMapper.countStatistics(
+                userName,
+                userPhone);
+        List<UserDTO> userDTOS = userMapper.statistics(
+                userName,
+                userPhone,
+                req.getStart(),
+                req.getPageSize(),
+                req.getSortField(),
+                req.getSortOrder());
+        PagingDTO pagingDTO = new PagingDTO(
+                req.getPageNo(),
+                req.getPageSize(),
+                count,
+                userDTOS);
+        return new TableRspDTO(pagingDTO);
+    }
+
+    @Override
     public OpResultDTO update(@RequestBody UserDTO userDTO) throws Exception {
         OpResultDTO op = new OpResultDTO();
         op.setResult(userMapper.updateUserType(userDTO.getUserId(), userDTO.getUserType()));

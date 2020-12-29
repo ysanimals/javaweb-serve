@@ -13,13 +13,16 @@ public class UserEntity {
     private String userCard;
     private Integer userStatus;
     private Integer userType;
+    private Integer total;
+    private Integer right;
+    private Integer wrong;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date gmtCreate;
 
     public UserEntity() {
     }
 
-    public UserEntity(Integer userId, String userName, Integer roleId, String userPwd, String userPhone, String userCard, Integer userStatus, Integer userType, Date gmtCreate) {
+    public UserEntity(Integer userId, String userName, Integer roleId, String userPwd, String userPhone, String userCard, Integer userStatus, Integer userType, Integer total, Integer right, Integer wrong, Date gmtCreate) {
         this.userId = userId;
         this.userName = userName;
         this.roleId = roleId;
@@ -28,6 +31,9 @@ public class UserEntity {
         this.userCard = userCard;
         this.userStatus = userStatus;
         this.userType = userType;
+        this.total = total;
+        this.right = right;
+        this.wrong = wrong;
         this.gmtCreate = gmtCreate;
     }
 
@@ -93,6 +99,30 @@ public class UserEntity {
 
     public void setUserType(Integer userType) {
         this.userType = userType;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public Integer getRight() {
+        return right;
+    }
+
+    public void setRight(Integer right) {
+        this.right = right;
+    }
+
+    public Integer getWrong() {
+        return wrong;
+    }
+
+    public void setWrong(Integer wrong) {
+        this.wrong = wrong;
     }
 
     public Date getGmtCreate() {

@@ -88,14 +88,14 @@ public class UserController {
         try {
             TokenDTO tokenDTO = JWTUtil.verifyToken(token);
             if (token == null) {
-                op.setMessage("200");
+                op.setMessage("error");
                 op.setResult("获取用户信息失败，请重新登录");
             } else {
                 Integer userId = tokenDTO.getUserId();
                 op = userService.getUserInfo(userId);
             }
         } catch (Exception e) {
-            op.setMessage("200");
+            op.setMessage("error");
             op.setResult("获取用户信息失败");
             System.out.println(e.toString());
         }
@@ -132,5 +132,21 @@ public class UserController {
             op.setResult("修改失败");
         }
         return op;
+    }
+
+    /**
+     * 查询用户统计信息
+     * @return OpResult
+     */
+    @RequestMapping(value = "/statistics", method = RequestMethod.POST)
+    public TableRspDTO statistics(@RequestBody TableReqDTO req) {
+        TableRspDTO rsp;
+        try {
+            rsp = userService.statistics(req);
+        } catch (Exception e) {
+            rsp = new TableRspDTO();
+            System.out.println(e.toString());
+        }
+        return rsp;
     }
 }
