@@ -23,20 +23,23 @@ public class UserController {
      * 用户登录
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JSONObject login(HttpServletRequest request) {
-        JSONObject json;
+    public OpResultDTO login(HttpServletRequest request) {
+        OpResultDTO op;
         try {
             JSONObject jsonObject = HttpRequestReader.getJsonObject(request);
             String loginName = jsonObject.getString("loginName");
             String loginPwd = jsonObject.getString("loginPwd");
             Boolean rememberMe = jsonObject.getBoolean("rememberMe");
-            json = userService.loginCheck(loginName, loginPwd, rememberMe);
+            op = userService.loginCheck(loginName, loginPwd, rememberMe);
         } catch (Exception e) {
-            json = new JSONObject();
+            op = new OpResultDTO();
+            op.setMessage("error");
+            op.setResult("登录失败");
             System.out.println(e.toString());
         }
-        return json;
+        return op;
     }
+
     /**
      * 获取用户信息
      */

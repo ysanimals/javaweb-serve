@@ -19,16 +19,21 @@ public class SortServiceImpl implements SortService {
 
     @Autowired(required = false)
     private SortMapper sortMapper;
+//
+//    @Override
+//    public TableRspDTO list4Table(TableReqDTO tableReqDTO) throws Exception {
+//        Integer count = sortMapper.count4Table(tableReqDTO.getQueryText());
+//        List<SortDTO> listSortDTOs = sortMapper.list4Table(tableReqDTO.getStart(),
+//                tableReqDTO.getPageSize(), tableReqDTO.getQueryText());
+//        return new TableRspDTO(count, listSortDTOs);
+//    }
 
-    @Override
-    public TableRspDTO list4Table(TableReqDTO tableReqDTO) throws Exception {
-        Integer count = sortMapper.count4Table(tableReqDTO.getQueryText());
-        List<SortDTO> listSortDTOs = sortMapper.list4Table(tableReqDTO.getStart(),
-                tableReqDTO.getPageSize(), tableReqDTO.getQueryText());
-        return new TableRspDTO(count, listSortDTOs);
-    }
+     @Override
+     public TableRspDTO list4Table(TableReqDTO tableReqDTO) throws Exception {
+         return null;
+     }
 
-    @Override
+     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer add(SortDTO sortDTO) throws Exception {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();

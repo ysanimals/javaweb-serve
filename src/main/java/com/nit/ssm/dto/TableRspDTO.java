@@ -1,34 +1,53 @@
 package com.nit.ssm.dto;
 
 import java.util.List;
-//持久化，与数据库对应；
-//
-//实体bean，一般是用于ORM对象关系映射，一个实体映射成一张表，一般无业务逻辑代码。
+
 public class TableRspDTO {
-    private Integer total;
-    private List listTable;
+
+    private String message;
+    private PagingDTO result;
+    private Integer status;
+    private Long timestamp;
 
     public TableRspDTO() {
     }
 
-    public TableRspDTO(Integer total, List listTable) {
-        this.total = total;
-        this.listTable = listTable;
+    public TableRspDTO(PagingDTO result) {
+        this.message = "success";
+        this.result = result;
+        this.status = 200;
+        this.timestamp = System.currentTimeMillis();
     }
 
-    public Integer getTotal() {
-        return total;
+    public String getMessage() {
+        return message;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public List getListTable() {
-        return listTable;
+    public PagingDTO getResult() {
+        return result;
     }
 
-    public void setListTable(List listTable) {
-        this.listTable = listTable;
+    public void setResult(PagingDTO result) {
+        this.result = result;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

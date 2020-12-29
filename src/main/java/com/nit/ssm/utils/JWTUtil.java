@@ -90,7 +90,7 @@ public class JWTUtil {
 
     public static void main(String[] args) {
         secretKey = "ADB8E3D5838A0AE8E274014928CE2CEE";
-        TokenDTO tokenDTO = new TokenDTO(10, "测试账号");
+        TokenDTO tokenDTO = new TokenDTO(10, "测试账号",1);
         String token = createSign(JSONObject.toJSONString(tokenDTO), 2400000);
         System.out.println(token);
     }

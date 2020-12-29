@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class UserDTO {
     private Integer key;
+    private Integer roleId;
     private Integer userId;
     private String userName;
     private String userPwd;
@@ -17,13 +18,30 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(Integer userId, String userName, String userPwd, Integer userType, Date gmtCreate, Integer key) {
+    public UserDTO(Integer key, Integer roleId, Integer userId, String userName, String userPwd, Integer userType, Date gmtCreate) {
+        this.key = key;
+        this.roleId = roleId;
         this.userId = userId;
         this.userName = userName;
         this.userPwd = userPwd;
         this.userType = userType;
         this.gmtCreate = gmtCreate;
+    }
+
+    public Integer getKey() {
+        return key;
+    }
+
+    public void setKey(Integer key) {
         this.key = key;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public Integer getUserId() {
@@ -64,13 +82,5 @@ public class UserDTO {
 
     public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
-    }
-
-    public Integer getKey() {
-        return key;
-    }
-
-    public void setKey(Integer key) {
-        this.key = key;
     }
 }
