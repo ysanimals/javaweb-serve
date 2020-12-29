@@ -2,11 +2,11 @@ package com.nit.ssm.controller;
 
 import com.nit.ssm.dto.GarbageDTO;
 import com.nit.ssm.dto.OpResultDTO;
+import com.nit.ssm.dto.TableReqDTO;
+import com.nit.ssm.dto.TableRspDTO;
 import com.nit.ssm.service.GarbageService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +31,38 @@ public class GarbageController {
             System.out.println(e.toString());
         }
         return op;
+    }
+
+    /**
+     * 查询垃圾信息封装便于前端展示
+     * @return OpResult
+     */
+    @RequestMapping(value = "/list4Table", method = RequestMethod.POST)
+    public TableRspDTO list4Table(@RequestBody TableReqDTO req) {
+        TableRspDTO rsp;
+        try {
+            rsp = garbageService.list4Table(req);
+        } catch (Exception e) {
+            rsp = new TableRspDTO();
+            System.out.println(e.toString());
+        }
+        return rsp;
+    }
+
+    /**
+     * 查询垃圾统计信息
+     * @return OpResult
+     */
+    @RequestMapping(value = "/statistics", method = RequestMethod.POST)
+    public TableRspDTO statistics(@RequestBody TableReqDTO req) {
+        TableRspDTO rsp;
+        try {
+            rsp = garbageService.statistics(req);
+        } catch (Exception e) {
+            rsp = new TableRspDTO();
+            System.out.println(e.toString());
+        }
+        return rsp;
     }
     /**
      * 批量导入垃圾信息
@@ -122,6 +154,44 @@ public class GarbageController {
             op = garbageService.checkOne(garbageDTO);
         } catch (Exception e) {
             op = null;
+            System.out.println(e.toString());
+        }
+        return op;
+    }
+
+    /**
+     * 上传文件
+     * @return OpResult
+     */
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public OpResultDTO uploadFile(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("garbageId")Long garbageId) {
+        OpResultDTO op;
+        try {
+            op = garbageService.uploadFile(file, garbageId);
+        } catch (Exception e) {
+            op = new OpResultDTO();
+            op.setMessage("error");
+            op.setResult("上传失败");
+            System.out.println(e.toString());
+        }
+        return op;
+    }
+
+    /**
+     * 上传文件
+     * @return OpResult
+     */
+    @RequestMapping(value = "/removeFile", method = RequestMethod.POST)
+    public OpResultDTO removeFile(@RequestBody GarbageDTO garbageDTO) {
+        OpResultDTO op;
+        try {
+            op = garbageService.removeFile(garbageDTO);
+        } catch (Exception e) {
+            op = new OpResultDTO();
+            op.setMessage("error");
+            op.setResult("删除失败");
             System.out.println(e.toString());
         }
         return op;

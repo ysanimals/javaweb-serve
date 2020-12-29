@@ -10,10 +10,12 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.web.multipart.MultipartFile;
+import com.nit.ssm.utils.UploadFileUtil;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class GarbageServiceImpl implements GarbageService {
@@ -50,6 +52,29 @@ public class GarbageServiceImpl implements GarbageService {
                         req.getSortOrder()));
         return new TableRspDTO(pagingDTO);
     }
+
+    @Override
+    public TableRspDTO statistics(TableReqDTO req) throws Exception {
+        String garbageFlag = req.parseQueryParam("garbageFlag");
+        String garbageName = req.parseQueryParam("garbageName");
+        List<GarbageDTO> garbageDTOS = garbageMapper.statistics(
+                garbageFlag,
+                garbageName,
+                req.getStart(),
+                req.getPageSize(),
+                req.getSortField(),
+                req.getSortOrder());
+        Long count = garbageMapper.countStatistics(
+                garbageFlag,
+                garbageName);
+        PagingDTO pagingDTO = new PagingDTO(
+                req.getPageNo(),
+                req.getPageSize(),
+                count,
+                garbageDTOS);
+        return new TableRspDTO(pagingDTO);
+    }
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -110,4 +135,31 @@ public class GarbageServiceImpl implements GarbageService {
         }
         return op;
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public OpResultDTO uploadFile(MultipartFile file, Long garbageId) throws Exception {
+        OpResultDTO op = new OpResultDTO();
+        String originalName = file.getOriginalFilename();
+        if (originalName == null) {
+            op.setMessage("error");
+            op.setResult("文件有误");
+        } else {
+            String fileName = UUID.randomUUID().toString() + originalName.substring(originalName.lastIndexOf("."));
+            String url = UploadFileUtil.uploadFile(file, fileName);
+            garbageMapper.updateImage(garbageId, url, originalName);
+            op.setResult(url);
+        }
+        return op;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public OpResultDTO removeFile(GarbageDTO garbageDTO) throws Exception {
+        OpResultDTO op = new OpResultDTO();
+        UploadFileUtil.deleteTempFile(garbageDTO.getImageUrl());
+        garbageMapper.removeImage(garbageDTO.getGarbageId());
+        return op;
+    }
+
 }

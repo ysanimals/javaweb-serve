@@ -58,6 +58,45 @@ public interface GarbageMapper {
             @Param("sortField") String sortField,
             @Param("sortOrder") String sortOrder) throws Exception;
 
+
+
+    /**
+     * 查询垃圾统计信息
+     * @return OpResult
+     */
+    @Select({"<script>SELECT garbage_id, garbage_name, total, g.right, wrong, " +
+            "(case when total = 0 then 0 when total > 0 then g.right / total end) AS `accuracy`, " +
+            "(total - g.right - wrong) AS `noAnswer`, " +
+            "garbage_id AS `key` FROM garbage g " +
+            "WHERE TRUE " +
+            "<if test = 'garbageFlag != null'>AND garbage_flag LIKE CONCAT('%', #{garbageFlag}, '%') </if>" +
+            "<if test = 'garbageName != null'>AND garbage_name LIKE CONCAT('%', #{garbageName}, '%') </if>" +
+            "ORDER BY " +
+            "<if test = 'sortField != null'>${sortField} ${sortOrder}, </if>" +
+            "total DESC, g.right DESC, garbage_id " +
+            "LIMIT #{start}, #{length}" +
+            "</script>"})
+    List<GarbageDTO> statistics(
+            @Param("garbageFlag")String garbageFlag,
+            @Param("garbageName")String garbageName,
+            @Param("start") Integer start,
+            @Param("length") Integer length,
+            @Param("sortField")String sortField,
+            @Param("sortOrder")String sortOrder) throws Exception;
+
+    /**
+     * 查询垃圾统计信息
+     * @return OpResult
+     */
+    @Select({"<script>SELECT count(*) from garbage " +
+            "WHERE TRUE " +
+            "<if test = 'garbageFlag != null'>AND garbage_flag LIKE CONCAT('%', #{garbageFlag}, '%') </if>" +
+            "<if test = 'garbageName != null'>AND garbage_name LIKE CONCAT('%', #{garbageName}, '%') </if>" +
+            "</script>"})
+    Long countStatistics(
+            @Param("garbageFlag")String garbageFlag,
+            @Param("garbageName")String garbageName) throws Exception;
+
     /**
      * 查询一条垃圾信息
      */
@@ -67,15 +106,14 @@ public interface GarbageMapper {
 
     /**
      * 插入一条垃圾信息
-     *
      * @return Integer
      */
     @Insert("INSERT INTO garbage (" +
-            "image_url, sort_id, garbage_name, garbage_flag, gmt_create) " +
-            "VALUES (#{entity.imageUrl}, #{entity.sortId}, " +
-            "#{entity.garbageName}, #{entity.garbageFlag}, #{entity.gmtCreate})")
+            "image_url, sort_id, garbage_name, garbage_flag, total, right, wrong, gmt_create) " +
+            "VALUES (#{entity.imageUrl}, #{entity.sortId}, #{entity.garbageName}, #{entity.garbageFlag}, " +
+            "#{entity.total}, #{entity.right}, #{entity.wrong}, #{entity.gmtCreate})")
     @Options(useGeneratedKeys = true, keyProperty = "garbageId", keyColumn = "garbage_id")
-    Integer add(@Param("entity") GarbageEntity garbageEntity) throws Exception;
+    Integer add(@Param("entity")GarbageEntity garbageEntity) throws Exception;
 
     /**
      * 更新一条垃圾信息
@@ -111,4 +149,35 @@ public interface GarbageMapper {
     @Select("SELECT sort_name, sort_info FROM sort " +
             "WHERE sort_id = #{sortId} LIMIT 1")
     GarbageDTO getSort(@Param("sortId") Integer sortId) throws Exception;
+
+    /**
+     * 更新垃圾图片
+     */
+    @Update("UPDATE garbage " +
+            "SET image_url = #{imageUrl}, original_name = #{originalName} " +
+            "WHERE garbage_id = #{garbageId} LIMIT 1")
+    void updateImage(
+            @Param("garbageId")Long garbageId,
+            @Param("imageUrl")String imageUrl,
+            @Param("originalName")String originalName) throws Exception;
+
+    /**
+     * 更新垃圾图片
+     */
+    @Update("UPDATE garbage " +
+            "SET image_url = NULL, original_name = NULL " +
+            "WHERE garbage_id = #{garbageId} LIMIT 1")
+    void removeImage(
+            @Param("garbageId")Integer garbageId) throws Exception;
+
+    /**
+     * @Description: 更新统计数据
+     * @Date: 2020/12/29
+     */
+    @Update("UPDATE garbage g " +
+            "SET g.total = g.total + #{entity.total}, g.right = g.right + #{entity.right}, " +
+            "g.wrong = g.wrong + #{entity.wrong} " +
+            "WHERE garbage_id = #{entity.garbageId} LIMIT 1")
+    void updateData(
+            @Param("entity") GarbageEntity garbageEntity) throws Exception;
 }
