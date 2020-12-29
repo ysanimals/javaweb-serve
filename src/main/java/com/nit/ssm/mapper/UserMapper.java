@@ -33,7 +33,7 @@ public interface UserMapper {
      * @return List
      */
     @Select({"<script>SELECT user_id, user_name, user_phone, id_number, user_type, gmt_create, " +
-            "user_id AS `key` FROM user " +
+            "user_id AS `key` FROM tb_user " +
             "WHERE role_id = 2 " +
             "<if test = 'userName != null'>AND user_name LIKE CONCAT('%', #{userName}, '%') </if>" +
             "<if test = 'userType != null'>AND user_type = #{userType} </if>" +
@@ -52,7 +52,7 @@ public interface UserMapper {
             @Param("sortField")String sortField,
             @Param("sortOrder")String sortOrder) throws Exception;
 
-    @Insert("INSERT INTO user " +
+    @Insert("INSERT INTO tb_user " +
             "(user_name, role_id, user_phone, user_pwd, user_card, user_type, gmt_create) " +
             "VALUES(#{entity.userName}, #{entity.roleId}, #{entity.userPhone}, #{entity.userPwd}, " +
             "#{entity.userCard}, #{entity.userType}, #{entity.gmtCreate})")

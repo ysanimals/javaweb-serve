@@ -17,6 +17,8 @@ public class TokenInterceptor implements HandlerInterceptor {
         //request.getRequestURI().indexOf("1.jsp")的意思就是，求请求的url内“1.jsp”的位置，返回的是一个数字，代表出现的位置，-1表示不存在。通常和-1比较来表示是否包含指定的页面，常用于过滤器。
         if (request.getRequestURL().indexOf("/api/user/login") != -1 ||
                 request.getRequestURL().indexOf("/api/code") != -1 ||
+                request.getRequestURL().indexOf("/api/user/checkName") != -1||
+                request.getRequestURL().indexOf("/api/user/register") != -1||
                 request.getRequestURL().indexOf("/api/garbage/queryOne") != -1 ||
                 request.getRequestURL().indexOf("/api/garbage/checkOne") != -1) {
             response.setHeader("token_status", "ok");

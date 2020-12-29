@@ -1,12 +1,10 @@
 package com.nit.ssm.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nit.ssm.dto.UserDTO;
-import com.nit.ssm.dto.TokenDTO;
+import com.nit.ssm.dto.*;
 import com.nit.ssm.service.UserService;
 import com.nit.ssm.utils.JWTUtil;
 import com.nit.ssm.utils.HttpRequestReader;
-import com.nit.ssm.dto.OpResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +39,47 @@ public class UserController {
     }
 
     /**
+     * 用户注册
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public OpResultDTO register(@RequestBody UserDTO userDTO) {
+        OpResultDTO op;
+        try {
+            op = userService.register(userDTO);
+        } catch (Exception e) {
+            op = new OpResultDTO();
+            op.setMessage("error");
+            op.setResult("注册失败");
+            System.out.println(e.toString());
+        }
+        return op;
+    }
+
+    /**
+     * 用户注册
+     */
+    @RequestMapping(value = "/checkName", method = RequestMethod.POST)
+    public OpResultDTO checkName(@RequestBody String userName) {
+        OpResultDTO op = new OpResultDTO();
+        try {
+            UserDTO userDTO = userService.checkName(userName);
+            if (userDTO == null) {
+                op.setMessage("ok");
+            } else {
+                op.setMessage("error");
+                op.setResult("用户名已存在");
+            }
+        } catch (Exception e) {
+            op.setMessage("error");
+            op.setResult("异常错误");
+            System.out.println(e.toString());
+        }
+        return op;
+    }
+
+
+
+    /**
      * 获取用户信息
      */
     @RequestMapping(value = "/userInfo", method = RequestMethod.POST)
@@ -59,6 +98,38 @@ public class UserController {
             op.setMessage("200");
             op.setResult("获取用户信息失败");
             System.out.println(e.toString());
+        }
+        return op;
+    }
+
+    /**
+     * 查询用户信息封装便于前端展示
+     * @return OpResult
+     */
+    @RequestMapping(value = "/list4Table", method = RequestMethod.POST)
+    public TableRspDTO list4Table(@RequestBody TableReqDTO req) {
+        TableRspDTO rsp;
+        try {
+            rsp = userService.list4Table(req);
+        } catch (Exception e) {
+            rsp = new TableRspDTO();
+            System.out.println(e.toString());
+        }
+        return rsp;
+    }
+
+    /**
+     * 修改用户状态
+     * @return OpResult
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public OpResultDTO update(@RequestBody UserDTO userDTO) {
+        OpResultDTO op = new OpResultDTO();
+        try {
+            op = userService.update(userDTO);
+        } catch (Exception e) {
+            op.setMessage("error");
+            op.setResult("修改失败");
         }
         return op;
     }
