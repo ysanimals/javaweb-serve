@@ -37,4 +37,18 @@ public class TokenDTO {
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"userId\":" + userId +
+                ",\"userName\":\"" + userName + "\"," +
+                "\"roleId\":" + roleId +
+                '}';
+    }
+
+    public static void main(String[] args) {
+        TokenDTO tokenDTO = new TokenDTO(1, "张三", 1);
+        System.out.println(tokenDTO.toString());
+    }
 }

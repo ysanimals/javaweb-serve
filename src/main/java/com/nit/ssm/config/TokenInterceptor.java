@@ -11,7 +11,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         /*
-         * 移动端不进行Token拦截与验证；用户登录不拦截与验证
+         * 移动端不进行Token拦截与验证；用户不拦截与验证
          */
         System.out.print(request.getRequestURL());
         //request.getRequestURI().indexOf("1.jsp")的意思就是，求请求的url内“1.jsp”的位置，返回的是一个数字，代表出现的位置，-1表示不存在。通常和-1比较来表示是否包含指定的页面，常用于过滤器。

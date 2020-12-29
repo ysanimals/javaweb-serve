@@ -39,7 +39,7 @@ public class JWTUtil {
      */
     public static String createSign(String seed, Integer expire) {
         Date iatDate = new Date();
-        Calendar nowTime = Calendar.getInstance();
+        Calendar nowTime = Calendar.getInstance();//使用当前的时区和语言环境的方法得到一个日历。
         nowTime.add(Calendar.MINUTE, expire);
         Date expiresDate = nowTime.getTime();
 
@@ -64,7 +64,9 @@ public class JWTUtil {
             Map<String, Claim> claims = verifier.verify(token).getClaims();
             Claim seed_claim = claims.get("seed");
             String jsonSign = seed_claim.asString();
+            System.out.println(jsonSign);
             JSONObject jsonObject = JSONObject.parseObject(jsonSign);
+
             tokenDTO.setUserId(jsonObject.getInteger("userId"));
             tokenDTO.setUserName(jsonObject.getString("userName"));
         } catch (Exception e) {
