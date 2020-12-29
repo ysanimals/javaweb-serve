@@ -16,6 +16,7 @@ public class UserEntity {
     private Integer total;
     private Integer right;
     private Integer wrong;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date gmtCreate;
 
