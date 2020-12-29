@@ -1,5 +1,6 @@
 package com.nit.ssm.service.impl;
 
+
 import com.nit.ssm.dto.*;
 import com.nit.ssm.entity.GarbageEntity;
 import com.nit.ssm.mapper.GarbageMapper;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+
+@Service
 public class GarbageServiceImpl implements GarbageService {
     @Resource
     private GarbageMapper garbageMapper;
@@ -30,6 +33,7 @@ public class GarbageServiceImpl implements GarbageService {
         String garbageName = req.parseQueryParam("garbageName");
         String sortId = req.parseQueryParam("sortId");
         Long count = garbageMapper.count4Table(
+                garbageFlag,
                 garbageName,
                 sortId);
         PagingDTO pagingDTO = new PagingDTO(
@@ -37,6 +41,7 @@ public class GarbageServiceImpl implements GarbageService {
                 req.getPageSize(),
                 count,
                 garbageMapper.list4Table(
+                        garbageFlag,
                         garbageName,
                         sortId,
                         req.getStart(),
@@ -82,7 +87,7 @@ public class GarbageServiceImpl implements GarbageService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public OpResultDTO remove(Long garbageId) throws Exception {
+    public OpResultDTO remove(Integer garbageId) throws Exception {
         OpResultDTO op = new OpResultDTO();
         op.setResult(garbageMapper.remove(garbageId));
         return op;

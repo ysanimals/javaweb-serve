@@ -5,7 +5,6 @@ import com.nit.ssm.dto.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 public interface GarbageService {
-
     /**
      * 查询所有垃圾信息
      * @return OpResult
@@ -40,7 +39,7 @@ public interface GarbageService {
      * 删除垃圾信息
      * @return OpResult
      */
-    OpResultDTO remove(Long garbageId) throws Exception;
+    OpResultDTO remove(Integer garbageId) throws Exception;
 
     /**
      * 查询一条不带答案的垃圾信息

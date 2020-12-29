@@ -6,8 +6,9 @@ import java.util.Date;
 
 public class GarbageEntity {
     private Integer garbageId;
-    private String garbageName;
-    private String imageUrl;
+    private String garbageFlag;
+    private String  garbageName;
+    private String  imageUrl;
     private Integer sortId;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date gmtCreate;
@@ -15,12 +16,21 @@ public class GarbageEntity {
     public GarbageEntity() {
     }
 
-    public GarbageEntity(Integer garbageId, String garbageName, String imageUrl, Integer sortId, Date gmtCreate) {
+    public GarbageEntity(Integer garbageId, String garbageFlag, String garbageName, String imageUrl, Integer sortId, Date gmtCreate) {
         this.garbageId = garbageId;
+        this.garbageFlag = garbageFlag;
         this.garbageName = garbageName;
         this.imageUrl = imageUrl;
         this.sortId = sortId;
         this.gmtCreate = gmtCreate;
+    }
+
+    public String getGarbageFlag() {
+        return garbageFlag;
+    }
+
+    public void setGarbageFlag(String garbageFlag) {
+        this.garbageFlag = garbageFlag;
     }
 
     public Integer getGarbageId() {

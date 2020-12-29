@@ -10,6 +10,7 @@ public class GarbageDTO {
     private String garbageName;
     private String imageUrl;
     private Integer sortId;
+    private String garbageFlag;
     private String sortName;
     private String sortInfo;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
@@ -18,15 +19,24 @@ public class GarbageDTO {
     public GarbageDTO() {
     }
 
-    public GarbageDTO(Integer key, Integer garbageId, String garbageName, String imageUrl, Integer sortId, String sortName, String sortInfo, Date gmtCreate) {
+    public GarbageDTO(Integer key, Integer garbageId, String garbageName, String imageUrl, Integer sortId,String garbageFlag, String sortName, String sortInfo, Date gmtCreate) {
         this.key = key;
         this.garbageId = garbageId;
         this.garbageName = garbageName;
         this.imageUrl = imageUrl;
         this.sortId = sortId;
+        this.garbageFlag = garbageFlag;
         this.sortName = sortName;
         this.sortInfo = sortInfo;
         this.gmtCreate = gmtCreate;
+    }
+
+    public String getGarbageFlag() {
+        return garbageFlag;
+    }
+
+    public void setGarbageFlag(String garbageFlag) {
+        this.garbageFlag = garbageFlag;
     }
 
     public Integer getKey() {
