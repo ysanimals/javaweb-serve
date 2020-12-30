@@ -12,6 +12,7 @@ public class ExamDTO {
     private String garbageName;
     private String imageUrl;
     private Integer userId;
+    private String userName;
     private Integer sortId;
     private Integer answerId;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
@@ -20,17 +21,26 @@ public class ExamDTO {
 
     }
 
-    public ExamDTO(Integer key, Integer examId, String examSn, Integer garbageId, String garbageName, String imageUrl, Integer userId, Integer sortId, Integer answerId, Date gmtCreate) {
+    public ExamDTO(Integer key, Integer examId,String userName, String examSn, Integer garbageId, String garbageName, String imageUrl, Integer userId, Integer sortId, Integer answerId, Date gmtCreate) {
         this.key = key;
         this.examId = examId;
         this.examSn = examSn;
         this.garbageId = garbageId;
         this.garbageName = garbageName;
         this.imageUrl = imageUrl;
+        this.userName = userName;
         this.userId = userId;
         this.sortId = sortId;
         this.answerId = answerId;
         this.gmtCreate = gmtCreate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Integer getKey() {

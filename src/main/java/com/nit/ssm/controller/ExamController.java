@@ -55,7 +55,7 @@ public class ExamController {
                 op.setResult("获取用户信息失败，请重新登陆");
             }
             else{
-                op = examService.addList(examDTOS);
+                op = examService.addList(examDTOS, tokenDTO.getUserId());
             }
         } catch (Exception e) {
             op.setMessage("error");
