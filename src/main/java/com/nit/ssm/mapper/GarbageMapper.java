@@ -43,7 +43,7 @@ public interface GarbageMapper {
             "WHERE TRUE " +
             "<if test = 'garbageFlag != null'>AND garbage_flag LIKE CONCAT('%', #{garbageFlag}, '%') </if>" +
             "<if test = 'garbageName != null'>AND garbage_name LIKE CONCAT('%', #{garbageName}, '%') </if>" +
-            "<if test = 'sortId != null'>AND sort_id = #{sortId} </if>" +
+            "<if test = 'sortId != null'>AND g.sort_id = #{sortId} </if>" +
             "ORDER BY " +
             "<if test = 'sortField != null'>${sortField} ${sortOrder}, </if>" +
             "garbage_id ASC " +
