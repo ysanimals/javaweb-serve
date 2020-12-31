@@ -1,7 +1,12 @@
 package com.nit.ssm.service.impl;
 
-import com.nit.ssm.dto.*;
+import com.nit.ssm.dto.ExamDTO;
+import com.nit.ssm.dto.GarbageDTO;
+import com.nit.ssm.dto.OpResultDTO;
+import com.nit.ssm.dto.UserDTO;
 import com.nit.ssm.entity.ExamEntity;
+import com.nit.ssm.entity.GarbageEntity;
+import com.nit.ssm.entity.UserEntity;
 import com.nit.ssm.mapper.ExamMapper;
 import com.nit.ssm.mapper.GarbageMapper;
 import com.nit.ssm.mapper.UserMapper;
@@ -49,7 +54,7 @@ public class ExamServiceImpl implements ExamService{
 
 
     @Override
-    public OpResultDTO addList(List<ExamDTO> examDTOS, Integer userId) throws Exception {
+    public OpResultDTO addList(List<ExamDTO> examDTOS) throws Exception {
         OpResultDTO op = new OpResultDTO();
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         for(ExamDTO examDTO : examDTOS){
@@ -61,28 +66,5 @@ public class ExamServiceImpl implements ExamService{
         }
         op.setResult(examDTOS);
         return op;
-    }
-
-    @Override
-    public TableRspDTO list4Table(TableReqDTO tableReqDTO) throws Exception {
-        String examSn = tableReqDTO.parseQueryParam("examSn");
-        Long count = examMapper.count4Table(
-                tableReqDTO.parseQueryParam("userName"),
-                tableReqDTO.parseQueryParam("garbageName"),
-                examSn
-        );
-        PagingDTO pagingDTO = new PagingDTO(
-                tableReqDTO.getPageNo(),
-                tableReqDTO.getPageSize(),
-                count,
-                examMapper.list4Table(
-                        tableReqDTO.parseQueryParam("userName"),
-                        tableReqDTO.parseQueryParam("garbageName"),
-                        examSn,
-                        tableReqDTO.getStart(),
-                        tableReqDTO.getPageSize(),
-                        tableReqDTO.getSortField(),
-                        tableReqDTO.getSortOrder()));
-        return new TableRspDTO(pagingDTO);
     }
 }
