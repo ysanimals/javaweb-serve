@@ -21,7 +21,7 @@ public class ExamServiceImpl implements ExamService{
     private GarbageMapper garbageMapper;
     @Resource
     private UserMapper userMapper;
-
+/*123123123*/
     @Override
     public OpResultDTO getList(Integer num, Integer userId) throws Exception {
         OpResultDTO op = new OpResultDTO();

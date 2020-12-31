@@ -11,7 +11,7 @@ public class ExamDTO {
     private Integer garbageId;
     private String garbageName;
     private String imageUrl;
-    private Integer userId;
+    private Integer userId;/*1213212313*/
     private String userName;
     private Integer sortId;
     private Integer answerId;

@@ -20,6 +20,7 @@ public interface ExamService{
      * list答题信息
      * @return OpResult
      */
+    /*123123123132*/
     TableRspDTO list4Table(TableReqDTO tableReqDTO) throws Exception;
 
 }
