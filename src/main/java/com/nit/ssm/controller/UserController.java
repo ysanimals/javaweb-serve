@@ -118,21 +118,7 @@ public class UserController {
         return rsp;
     }
 
-    /**
-     * 修改用户状态
-     * @return OpResult
-     */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public OpResultDTO update(@RequestBody UserDTO userDTO) {
-        OpResultDTO op = new OpResultDTO();
-        try {
-            op = userService.update(userDTO);
-        } catch (Exception e) {
-            op.setMessage("error");
-            op.setResult("修改失败");
-        }
-        return op;
-    }
+
 
     /**
      * 查询用户统计信息
@@ -148,5 +134,21 @@ public class UserController {
             System.out.println(e.toString());
         }
         return rsp;
+    }
+
+    /**
+     * 修改用户状态
+     * @return OpResult
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public OpResultDTO update(@RequestBody UserDTO userDTO) {
+        OpResultDTO op = new OpResultDTO();
+        try {
+            op = userService.update(userDTO);
+        } catch (Exception e) {
+            op.setMessage("error");
+            op.setResult("修改失败");
+        }
+        return op;
     }
 }

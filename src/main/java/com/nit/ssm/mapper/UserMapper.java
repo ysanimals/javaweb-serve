@@ -32,7 +32,7 @@ public interface UserMapper {
      * 查询用户信息封装便于前端展示
      * @return List
      */
-    @Select({"<script>SELECT user_id, user_name, user_phone, id_number, user_type, gmt_create, " +
+    @Select({"<script>SELECT user_id, user_name, user_phone, user_card, user_type, gmt_create, " +
             "user_id AS `key` FROM tb_user " +
             "WHERE role_id = 2 " +
             "<if test = 'userName != null'>AND user_name LIKE CONCAT('%', #{userName}, '%') </if>" +
@@ -87,7 +87,7 @@ public interface UserMapper {
             "</script>"})
     Long countStatistics(
             @Param("userName")String userName,
-            @Param("phone")String userPhone) throws Exception;
+            @Param("userPhone")String userPhone) throws Exception;
 
 
 

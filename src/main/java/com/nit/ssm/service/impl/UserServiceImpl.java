@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
                         userDTO.getUserName(),
                         userDTO.getRoleId(),
                         token,
-                        userMapper.queryRoleMenu(userDTO.getRoleId()));
+                        queryRoleMenu(userDTO.getRoleId()));
                 op.setMessage("success");
                 op.setResult(accountDTO);
             }
@@ -63,6 +63,9 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = mapperFactory.getMapperFacade().map(userDTO, UserEntity.class);
         userEntity.setRoleId(2);
         userEntity.setUserType(0);
+        userEntity.setTotal(0);
+        userEntity.setRight(0);
+        userEntity.setWrong(0);
         userEntity.setGmtCreate(new Date(System.currentTimeMillis()));
         op.setResult(userMapper.add(userEntity));
         return op;
@@ -72,8 +75,6 @@ public class UserServiceImpl implements UserService {
     public UserDTO checkName(String userName) throws Exception {
         return userMapper.getByUserName(userName);
     }
-
-
 
     @Override
     public OpResultDTO getUserInfo(Integer userId) throws Exception {
@@ -100,7 +101,14 @@ public class UserServiceImpl implements UserService {
         router.forEach(p -> {
             for (MenuDTO m : menuDTOS) {
                 if (m.getLevelType() == 2 && m.getFatherId().equals(p.getMenuId())) {
+                    List<MenuDTO> children = new ArrayList<>();
+                    m.setChildren(children);
                     p.getChildren().add(m);
+                    for (MenuDTO n : menuDTOS) {
+                        if (n.getLevelType() == 3 && n.getFatherId().equals(m.getMenuId())) {
+                            m.getChildren().add(n);
+                        }
+                    }
                 }
             }
         });
@@ -111,7 +119,7 @@ public class UserServiceImpl implements UserService {
     public TableRspDTO list4Table(@RequestBody TableReqDTO req) throws Exception {
         String userName = req.parseQueryParam("userName");
         String userType = req.parseQueryParam("userType");
-        String phone = req.parseQueryParam("phone");
+        String phone = req.parseQueryParam("userPhone");
         Long count = userMapper.count4Table(
                 userName,
                 userType,
@@ -134,13 +142,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public TableRspDTO statistics(@RequestBody TableReqDTO req) throws Exception {
         String userName = req.parseQueryParam("userName");
-        String userPhone = req.parseQueryParam("phone");
+        String phone = req.parseQueryParam("userPhone");
         Long count = userMapper.countStatistics(
                 userName,
-                userPhone);
+                phone);
         List<UserDTO> userDTOS = userMapper.statistics(
                 userName,
-                userPhone,
+                phone,
                 req.getStart(),
                 req.getPageSize(),
                 req.getSortField(),
@@ -152,6 +160,7 @@ public class UserServiceImpl implements UserService {
                 userDTOS);
         return new TableRspDTO(pagingDTO);
     }
+
 
     @Override
     public OpResultDTO update(@RequestBody UserDTO userDTO) throws Exception {
