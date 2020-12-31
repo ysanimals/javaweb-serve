@@ -24,7 +24,7 @@ public class ExamEntity {
 
     public Integer getExamId() {
         return examId;
-    }
+    }/*123123123123132132132*/
 
     public void setExamId(Integer examId) {
         this.examId = examId;

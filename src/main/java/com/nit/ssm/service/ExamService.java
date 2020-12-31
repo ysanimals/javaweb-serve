@@ -1,9 +1,6 @@
 package com.nit.ssm.service;
 
-import com.nit.ssm.dto.ExamDTO;
-import com.nit.ssm.dto.GarbageDTO;
-import com.nit.ssm.dto.OpResultDTO;
-import com.nit.ssm.dto.UserDTO;
+import com.nit.ssm.dto.*;
 
 import java.util.List;
 public interface ExamService{
@@ -17,5 +14,13 @@ public interface ExamService{
      * 批量导入回答信息
      * @return OpResult
      */
-    OpResultDTO addList(List<ExamDTO> examDTOS) throws Exception;
+    OpResultDTO addList(List<ExamDTO> examDTOS, Integer userId) throws Exception;
+
+    /**
+     * list答题信息
+     * @return OpResult
+     */
+    /*123123123132*/
+    TableRspDTO list4Table(TableReqDTO tableReqDTO) throws Exception;
+
 }
