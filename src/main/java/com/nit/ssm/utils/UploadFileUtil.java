@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class UploadFileUtil {
-    private static final String PATH_HEAD = "http://127.0.0.1:8998/file/";
+    private static final String PATH_HEAD = "http://localhost:9111/";
     private static final String PHYSICAL_PATH = "D:\\javaweb\\3180434038\\";
 
     //获取流文件

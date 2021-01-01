@@ -65,7 +65,7 @@ public class TableReqDTO {
         return (this.pageNo - 1) * this.pageSize;
     }
 
-    // 解析查询字符串
+    // 解析查询字符串 获取想查询字符串的键值
     public String parseQueryParam(String paramName) {
         String queryValue = null;
         if (queryParam != null && !queryParam.equals("{}")) {

@@ -22,7 +22,7 @@ public interface GarbageMapper {
      */
     @Select({"<script> SELECT COUNT(*) FROM garbage " +
             "WHERE TRUE " +
-            "<if test = 'garbageFlag != null'>AND garbage_flag LIKE CONCAT('%', #{garbageFlag}, '%') </if>" +
+            "<if test = 'garbageFlag != null'>AND garbage_flag LIKE CONCAT('%', #{garbageFlag}, '%') </if>" +   //只要不为空,就进行查询操作
             "<if test = 'garbageName != null'>AND garbage_name LIKE CONCAT('%', #{garbageName}, '%') </if>" +
             "<if test = 'sortId != null'>AND sort_id = #{sortId} </if>" +
             "</script>"})
@@ -103,7 +103,7 @@ public interface GarbageMapper {
      * @return Integer
      */
     @Insert("INSERT INTO garbage (" +
-            "image_url, sort_id, garbage_name, garbage_flag, total, right, wrong, gmt_create) " +
+            "image_url, sort_id, garbage_name, garbage_flag, total, garbage.right, wrong, gmt_create) " +
             "VALUES (#{entity.imageUrl}, #{entity.sortId}, #{entity.garbageName}, #{entity.garbageFlag}, " +
             "#{entity.total}, #{entity.right}, #{entity.wrong}, #{entity.gmtCreate})")
     @Options(useGeneratedKeys = true, keyProperty = "garbageId", keyColumn = "garbage_id")

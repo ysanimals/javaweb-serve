@@ -62,9 +62,9 @@ public class UserController {
     public OpResultDTO checkName(@RequestBody String userName) {
         OpResultDTO op = new OpResultDTO();
         try {
-            UserDTO userDTO = userService.checkName(userName);
+            UserDTO userDTO = userService.checkName(userName);//查看数据库 去除重名的错误
             if (userDTO == null) {
-                op.setMessage("ok");
+                op.setMessage("ok");//数据库中不存在  则返回的是空 允许注册
             } else {
                 op.setMessage("error");
                 op.setResult("用户名已存在");
