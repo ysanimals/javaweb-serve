@@ -67,7 +67,7 @@ public interface GarbageService {
      * 上传图片
      * @return OpResult
      */
-    OpResultDTO uploadFile(MultipartFile file, Long garbageId) throws Exception;
+    OpResultDTO uploadFile(MultipartFile file, Integer garbageId) throws Exception;
 
     /**
      * 删除图片

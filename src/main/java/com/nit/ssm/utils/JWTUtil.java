@@ -69,6 +69,7 @@ public class JWTUtil {
 
             tokenDTO.setUserId(jsonObject.getInteger("userId"));
             tokenDTO.setUserName(jsonObject.getString("userName"));
+            tokenDTO.setRoleId(jsonObject.getInteger("roleId"));
         } catch (Exception e) {
             logger.error("Token验证======>" + tokenDTO.toString());
             logger.error(e.toString());

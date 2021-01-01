@@ -75,7 +75,6 @@ public class GarbageServiceImpl implements GarbageService {
         return new TableRspDTO(pagingDTO);
     }
 
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public OpResultDTO addList(List<GarbageDTO> garbageDTOS) throws Exception {
@@ -83,6 +82,9 @@ public class GarbageServiceImpl implements GarbageService {
         OpResultDTO op = new OpResultDTO();
         for (GarbageDTO garbageDTO: garbageDTOS) {
             GarbageEntity garbageEntity = mapperFactory.getMapperFacade().map(garbageDTO, GarbageEntity.class);
+            garbageEntity.setTotal(0);
+            garbageEntity.setRight(0);
+            garbageEntity.setWrong(0);
             garbageEntity.setGmtCreate(new Date(System.currentTimeMillis()));
             garbageMapper.add(garbageEntity);
         }
@@ -95,6 +97,9 @@ public class GarbageServiceImpl implements GarbageService {
         OpResultDTO op = new OpResultDTO();
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         GarbageEntity garbageEntity = mapperFactory.getMapperFacade().map(garbageDTO, GarbageEntity.class);
+        garbageEntity.setTotal(0);
+        garbageEntity.setRight(0);
+        garbageEntity.setWrong(0);
         garbageEntity.setGmtCreate(new Date(System.currentTimeMillis()));
         op.setResult(garbageMapper.add(garbageEntity));
         return op;
@@ -138,7 +143,7 @@ public class GarbageServiceImpl implements GarbageService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public OpResultDTO uploadFile(MultipartFile file, Long garbageId) throws Exception {
+    public OpResultDTO uploadFile(MultipartFile file, Integer garbageId) throws Exception {
         OpResultDTO op = new OpResultDTO();
         String originalName = file.getOriginalFilename();
         if (originalName == null) {
@@ -161,5 +166,4 @@ public class GarbageServiceImpl implements GarbageService {
         garbageMapper.removeImage(garbageDTO.getGarbageId());
         return op;
     }
-
 }

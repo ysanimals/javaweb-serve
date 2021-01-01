@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 public class UploadFileUtil {
     private static final String PATH_HEAD = "http://127.0.0.1:8998/file/";
-    private static final String PHYSICAL_PATH = "D:\\learning\\profession\\web\\javaweb\\大作业\\3180421011\\file\\";
+    private static final String PHYSICAL_PATH = "D:\\javaweb\\3180434038\\";
 
     //获取流文件
     private static void inputStreamToFile(InputStream ins, FileOutputStream os) throws IOException {

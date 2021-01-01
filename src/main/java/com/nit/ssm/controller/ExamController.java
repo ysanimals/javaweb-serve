@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-
 @RequestMapping(value = "/api/exam")
 public class ExamController {
 
@@ -17,7 +16,7 @@ public class ExamController {
     private ExamService examService;
 
     /**
-     * 获取题目
+     * 获取若干条题目
      * @return OpResult
      */
     @RequestMapping(value = "/getList", method = RequestMethod.POST)
@@ -44,23 +43,47 @@ public class ExamController {
      * 批量导入回答信息
      * @return OpResult
      */
-    @RequestMapping(value = "/addList",method = RequestMethod.POST)
+    @RequestMapping(value = "/addList", method = RequestMethod.POST)
     public OpResultDTO addList(@RequestHeader(name = "Access-Token")String token,
-                               @RequestBody List<ExamDTO> examDTOS){
+                               @RequestBody List<ExamDTO> examDTOS) {
         OpResultDTO op = new OpResultDTO();
-        try{
+        try {
             TokenDTO tokenDTO = JWTUtil.verifyToken(token);
-            if(tokenDTO == null){
+            if (tokenDTO == null) {
                 op.setMessage("error");
-                op.setResult("获取用户信息失败，请重新登陆");
-            }
-            else{
+                op.setResult("获取用户信息失败，请重新登录");
+            } else {
                 op = examService.addList(examDTOS, tokenDTO.getUserId());
             }
         } catch (Exception e) {
             op.setMessage("error");
             op.setResult("上传失败");
         }
-        return op;/*1231231321321*/
+        return op;
     }
+
+    /**
+     * list答题信息
+     * @return OpResult
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public TableRspDTO list4Table(
+            @RequestHeader(name = "Access-Token")String token,
+            @RequestBody TableReqDTO req) {
+        TableRspDTO rsp = new TableRspDTO();
+        try {
+            TokenDTO tokenDTO = JWTUtil.verifyToken(token);
+            if (tokenDTO != null) {
+                if (tokenDTO.getRoleId() == 1) {
+                    rsp = examService.list4Table(req);
+                } else {
+                    rsp = examService.listUserTable(req, tokenDTO.getUserId());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return rsp;
+    }
+
 }

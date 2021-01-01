@@ -80,7 +80,7 @@ public interface UserMapper {
      * 查询用户统计信息
      * @return OpResult
      */
-    @Select({"<script>SELECT count(*) from user " +
+    @Select({"<script>SELECT count(*) from tb_user " +
             "WHERE TRUE " +
             "<if test = 'userName != null'>AND user_name LIKE CONCAT('%', #{userName}, '%') </if>" +
             "<if test = 'userPhone != null'>AND user_phone LIKE CONCAT('%', #{phone}, '%') </if>" +
@@ -151,7 +151,7 @@ public interface UserMapper {
      * @Description: 更新统计数据
      * @Date: 2020/12/29
      */
-    @Update("UPDATE user u " +
+    @Update("UPDATE tb_user u " +
             "SET u.total = u.total + #{entity.total}, u.right = u.right + #{entity.right}, " +
             "u.wrong = u.wrong + #{entity.wrong} " +
             "WHERE user_id = #{entity.userId} LIMIT 1")

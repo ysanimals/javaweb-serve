@@ -11,7 +11,6 @@ import java.util.List;
 public interface GarbageMapper {
     /**
      * 查询所有垃圾信息
-     *
      * @return List
      */
     @Select("SELECT *, garbage_id AS `key` FROM garbage")
@@ -19,7 +18,6 @@ public interface GarbageMapper {
 
     /**
      * 查询垃圾信息总数
-     *
      * @return List
      */
     @Select({"<script> SELECT COUNT(*) FROM garbage " +
@@ -28,14 +26,12 @@ public interface GarbageMapper {
             "<if test = 'garbageName != null'>AND garbage_name LIKE CONCAT('%', #{garbageName}, '%') </if>" +
             "<if test = 'sortId != null'>AND sort_id = #{sortId} </if>" +
             "</script>"})
-    Long count4Table(
-            @Param("garbageFlag")String garbageFlag,
-            @Param("garbageName") String garbageName,
-            @Param("sortId") String sortId) throws Exception;
+    Long count4Table(@Param("garbageFlag")String garbageFlag,
+                     @Param("garbageName")String garbageName,
+                     @Param("sortId")String sortId) throws Exception;
 
     /**
      * 查询垃圾信息封装便于前端展示
-     *
      * @return List
      */
     @Select({"<script> SELECT *, garbage_id AS `key` FROM garbage g " +
@@ -51,21 +47,19 @@ public interface GarbageMapper {
             "</script>"})
     List<GarbageDTO> list4Table(
             @Param("garbageFlag")String garbageFlag,
-            @Param("garbageName") String garbageName,
-            @Param("sortId") String sortId,
+            @Param("garbageName")String garbageName,
+            @Param("sortId")String sortId,
             @Param("start") Integer start,
             @Param("length") Integer length,
-            @Param("sortField") String sortField,
-            @Param("sortOrder") String sortOrder) throws Exception;
-
-
+            @Param("sortField")String sortField,
+            @Param("sortOrder")String sortOrder) throws Exception;
 
     /**
      * 查询垃圾统计信息
      * @return OpResult
      */
     @Select({"<script>SELECT garbage_id, garbage_name, total, g.right, wrong, " +
-            "(case when total = 0 then 0 when total > 0 then g.right / total end) AS `accuracy`, " +
+            "(CASE WHEN total = 0 THEN 0 WHEN total > 0 THEN g.right / total END) AS `accuracy`, " +
             "(total - g.right - wrong) AS `noAnswer`, " +
             "garbage_id AS `key` FROM garbage g " +
             "WHERE TRUE " +
@@ -102,7 +96,7 @@ public interface GarbageMapper {
      */
     @Select("SELECT *, garbage_id AS `key` FROM garbage " +
             "WHERE garbage_id = #{garbageId} LIMIT 1")
-    GarbageDTO getGarbageById(@Param("garbageId") Integer garbageId) throws Exception;
+    GarbageDTO getGarbageById(@Param("garbageId")Integer garbageId) throws Exception;
 
     /**
      * 插入一条垃圾信息
@@ -117,23 +111,21 @@ public interface GarbageMapper {
 
     /**
      * 更新一条垃圾信息
-     *
      * @return Integer
      */
     @Update("UPDATE garbage " +
             "SET image_url = #{entity.imageUrl}, sort_id = #{entity.sortId}, " +
             "garbage_name = #{entity.garbageName}, garbage_flag = #{entity.garbageFlag} " +
             "WHERE garbage_id = #{entity.garbageId}")
-    Integer update(@Param("entity") GarbageEntity garbageEntity) throws Exception;
+    Integer update(@Param("entity")GarbageEntity garbageEntity) throws Exception;
 
     /**
      * 删除一条垃圾信息
-     *
      * @return Integer
      */
     @Delete("DELETE FROM garbage " +
             "WHERE garbage_id = #{garbageId}")
-    Integer remove(@Param("garbageId") Integer garbageId) throws Exception;
+    Integer remove(@Param("garbageId")Integer garbageId) throws Exception;
 
     /**
      * 获取一条随机垃圾信息
@@ -148,7 +140,7 @@ public interface GarbageMapper {
      */
     @Select("SELECT sort_name, sort_info FROM sort " +
             "WHERE sort_id = #{sortId} LIMIT 1")
-    GarbageDTO getSort(@Param("sortId") Integer sortId) throws Exception;
+    GarbageDTO getSort(@Param("sortId")Integer sortId) throws Exception;
 
     /**
      * 更新垃圾图片
@@ -157,7 +149,7 @@ public interface GarbageMapper {
             "SET image_url = #{imageUrl}, original_name = #{originalName} " +
             "WHERE garbage_id = #{garbageId} LIMIT 1")
     void updateImage(
-            @Param("garbageId")Long garbageId,
+            @Param("garbageId")Integer garbageId,
             @Param("imageUrl")String imageUrl,
             @Param("originalName")String originalName) throws Exception;
 

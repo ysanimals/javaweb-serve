@@ -166,7 +166,7 @@ public class GarbageController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public OpResultDTO uploadFile(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("garbageId")Long garbageId) {
+            @RequestParam("garbageId")Integer garbageId) {
         OpResultDTO op;
         try {
             op = garbageService.uploadFile(file, garbageId);

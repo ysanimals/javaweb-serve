@@ -1,15 +1,12 @@
 package com.nit.ssm.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.nit.ssm.dto.*;
-import com.nit.ssm.entity.SortEntity;
 import com.nit.ssm.entity.UserEntity;
 import com.nit.ssm.mapper.UserMapper;
 import com.nit.ssm.service.UserService;
 import com.nit.ssm.utils.JWTUtil;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 

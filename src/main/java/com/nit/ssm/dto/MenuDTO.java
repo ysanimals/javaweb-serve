@@ -17,6 +17,7 @@ public class MenuDTO {
     private Integer levelType;
     private Integer menuStatus;
     private String menuIcon;
+    private Integer menuSort;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date gmtCreate;
     private List<MenuDTO> children;
@@ -24,7 +25,7 @@ public class MenuDTO {
     public MenuDTO() {
     }
 
-    public MenuDTO(Integer menuId, String menuCode, String menuName, Integer fatherId, Integer levelType, Integer menuStatus, String menuIcon, Date gmtCreate, List<MenuDTO> children) {
+    public MenuDTO(Integer menuId, String menuCode, String menuName, Integer fatherId, Integer levelType, Integer menuStatus, String menuIcon, Integer menuSort, Date gmtCreate, List<MenuDTO> children) {
         this.menuId = menuId;
         this.menuCode = menuCode;
         this.menuName = menuName;
@@ -32,6 +33,7 @@ public class MenuDTO {
         this.levelType = levelType;
         this.menuStatus = menuStatus;
         this.menuIcon = menuIcon;
+        this.menuSort = menuSort;
         this.gmtCreate = gmtCreate;
         this.children = children;
     }
@@ -90,6 +92,14 @@ public class MenuDTO {
 
     public void setMenuIcon(String menuIcon) {
         this.menuIcon = menuIcon;
+    }
+
+    public Integer getMenuSort() {
+        return menuSort;
+    }
+
+    public void setMenuSort(Integer menuSort) {
+        this.menuSort = menuSort;
     }
 
     public Date getGmtCreate() {
