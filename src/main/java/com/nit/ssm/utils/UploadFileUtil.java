@@ -42,6 +42,27 @@ public class UploadFileUtil {
         return PATH_HEAD + fileName;
     }
 
+
+    /**
+     * 上传文件到服务器的指定路径
+     *
+     * @return 文件最终地址
+     */
+    public static String uploadImg(MultipartFile multipartFile, String fileName) throws IOException {
+        File file;
+        if (multipartFile != null) {
+            InputStream is = multipartFile.getInputStream();
+            file = new File(PHYSICAL_PATH);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            inputStreamToFile(is, new FileOutputStream(PHYSICAL_PATH + fileName));
+            is.close();
+        }
+        return PATH_HEAD + fileName;
+    }
+
+
     /**
      * 删除本地临时文件
      */

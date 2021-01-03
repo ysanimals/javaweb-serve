@@ -49,7 +49,7 @@ public class TableReqDTO {
     }
 
     public void setSortOrder(String sortOrder) {
-        this.sortOrder = sortOrder == null ? null : (sortOrder.equals("ascend") ? sortOrder.substring(0, 3) : sortOrder.substring(0, 4));
+        this.sortOrder = sortOrder == null ? "DESC" : sortOrder;
     }
 
     public String getQueryParam() {

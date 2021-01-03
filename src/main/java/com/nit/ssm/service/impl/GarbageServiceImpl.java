@@ -81,7 +81,7 @@ public class GarbageServiceImpl implements GarbageService {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         OpResultDTO op = new OpResultDTO();
         for (GarbageDTO garbageDTO: garbageDTOS) {
-            GarbageEntity garbageEntity = mapperFactory.getMapperFacade().map(garbageDTO, GarbageEntity.class);
+            GarbageEntity garbageEntity = mapperFactory.getMapperFacade().map(garbageDTO, GarbageEntity.class);//映射
             garbageEntity.setTotal(0);
             garbageEntity.setRight(0);
             garbageEntity.setWrong(0);
@@ -93,14 +93,21 @@ public class GarbageServiceImpl implements GarbageService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public OpResultDTO add(GarbageDTO garbageDTO) throws Exception {
+    public OpResultDTO add(GarbageDTO garbageDTO, MultipartFile file) throws Exception {
         OpResultDTO op = new OpResultDTO();
-        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();//MapperFactory用于注册字段映射，配置转换器，自定义映射器等
         GarbageEntity garbageEntity = mapperFactory.getMapperFacade().map(garbageDTO, GarbageEntity.class);
         garbageEntity.setTotal(0);
         garbageEntity.setRight(0);
         garbageEntity.setWrong(0);
         garbageEntity.setGmtCreate(new Date(System.currentTimeMillis()));
+        if (file != null) {
+            String originalName = file.getOriginalFilename();
+            String fileName = UUID.randomUUID().toString() + originalName.substring(originalName.lastIndexOf("."));
+            String url = UploadFileUtil.uploadFile(file, fileName);
+            garbageEntity.setOriginalName(originalName);
+            garbageEntity.setImageUrl(url);
+        }
         op.setResult(garbageMapper.add(garbageEntity));
         return op;
     }
@@ -131,6 +138,7 @@ public class GarbageServiceImpl implements GarbageService {
     @Override
     public OpResultDTO checkOne(GarbageDTO garbageDTO) throws Exception {
         OpResultDTO op = new OpResultDTO();
+
         GarbageDTO garbageDTO1 = garbageMapper.getGarbageById(garbageDTO.getGarbageId());
         if (garbageDTO.getSortId().equals(garbageDTO1.getSortId())) {
             op.setMessage("yes");

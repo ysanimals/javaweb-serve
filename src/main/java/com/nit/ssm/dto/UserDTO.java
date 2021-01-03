@@ -11,6 +11,7 @@ public class UserDTO {
     private Integer roleId;
     private String userPhone;
     private String userPwd;
+    private String userCard;
     private Integer userType;
     private Integer total;
     private Integer right;
@@ -23,13 +24,14 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(Integer key, Integer userId, String userName, Integer roleId, String userPhone, String userPwd, Integer userType, Integer total, Integer right, Integer wrong, Integer noAnswer, Double accuracy, Date gmtCreate) {
+    public UserDTO(Integer key, Integer userId, String userName, Integer roleId, String userPhone, String userPwd, String userCard, Integer userType, Integer total, Integer right, Integer wrong, Integer noAnswer, Double accuracy, Date gmtCreate) {
         this.key = key;
         this.userId = userId;
         this.userName = userName;
         this.roleId = roleId;
         this.userPhone = userPhone;
         this.userPwd = userPwd;
+        this.userCard = userCard;
         this.userType = userType;
         this.total = total;
         this.right = right;
@@ -85,6 +87,14 @@ public class UserDTO {
 
     public void setUserPwd(String userPwd) {
         this.userPwd = userPwd;
+    }
+
+    public String getUserCard() {
+        return userCard;
+    }
+
+    public void setUserCard(String userCard) {
+        this.userCard = userCard;
     }
 
     public Integer getUserType() {

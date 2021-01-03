@@ -92,7 +92,7 @@ public interface UserMapper {
 
 
     @Insert("INSERT INTO tb_user " +
-            "(user_name, role_id, user_phone, user_pwd, user_card, user_type, total, right, wrong, gmt_create) " +
+            "(user_name, role_id, user_phone, user_pwd, user_card, user_type, total, tb_user.right, wrong, gmt_create) " +
             "VALUES(#{entity.userName}, #{entity.roleId}, #{entity.userPhone}, #{entity.userPwd}, " +
             "#{entity.userCard}, #{entity.userType}, #{entity.total}, #{entity.right}, " +
             "#{entity.wrong}, #{entity.gmtCreate})")

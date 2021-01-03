@@ -36,7 +36,7 @@ public interface GarbageService {
      * 添加垃圾信息
      * @return OpResult
      */
-    OpResultDTO add(GarbageDTO garbageDTO) throws Exception;
+    OpResultDTO add(GarbageDTO garbageDTO, MultipartFile file) throws Exception;
 
     /**
      * 修改垃圾信息

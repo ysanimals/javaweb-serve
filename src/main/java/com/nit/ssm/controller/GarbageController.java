@@ -1,16 +1,23 @@
 package com.nit.ssm.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nit.ssm.dto.GarbageDTO;
 import com.nit.ssm.dto.OpResultDTO;
 import com.nit.ssm.dto.TableReqDTO;
 import com.nit.ssm.dto.TableRspDTO;
 import com.nit.ssm.service.GarbageService;
+import com.nit.ssm.utils.HttpRequestReader;
+import com.nit.ssm.utils.UploadFileUtil;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/api/garbage")
@@ -84,11 +91,24 @@ public class GarbageController {
      * 增加垃圾信息
      * @return OpResult
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public OpResultDTO add(@RequestBody GarbageDTO garbageDTO){
+    @RequestMapping(value = "/add",method = RequestMethod.POST)//其他层抛出异常在controller中被捕获
+    public OpResultDTO add( @RequestParam(value = "file",required = false)MultipartFile file,
+                            @RequestParam("garbageFlag")String  garbageFlag,
+                            @RequestParam("garbageName")String garbageName,
+                            @RequestParam("sortId")Integer sortId){
         OpResultDTO op = new OpResultDTO();
         try{
-            op = garbageService.add(garbageDTO);
+            GarbageDTO garbageDTO = new GarbageDTO();
+            garbageDTO.setSortId(sortId);
+            garbageDTO.setGarbageName(garbageName);
+            garbageDTO.setGarbageFlag(garbageFlag);
+            if(file != null)
+            {
+                op = garbageService.add(garbageDTO,file);
+            }else{
+                op = garbageService.add(garbageDTO,null);
+            }
+
         } catch (Exception e) {
             op.setMessage("error");
             op.setResult("添加失败");
@@ -96,6 +116,9 @@ public class GarbageController {
         }
         return op;
     }
+
+
+
     /**
      * 修改垃圾信息
      * @return OpResult
@@ -178,6 +201,7 @@ public class GarbageController {
         }
         return op;
     }
+
 
     /**
      * 上传文件
