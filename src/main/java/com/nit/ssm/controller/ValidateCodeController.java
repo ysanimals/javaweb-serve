@@ -32,7 +32,7 @@ public class ValidateCodeController {
             String imgCodeKey = randomUUID.toString();
             System.out.println("imgCodeKey:" + imgCodeKey);
             // 图片验证码有效时间 ：5 分钟
-            redisTemplate.opsForValue().set(imgCodeKey, imgCode, 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(imgCodeKey, imgCode, 5, TimeUnit.MINUTES);//  设置变量值的过期时间
             result.put("imgCodeKey", imgCodeKey);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -51,7 +51,9 @@ public class ValidateCodeController {
             JSONObject jsonObject = HttpRequestReader.getJsonObject(request);
             String imgCodeKey = jsonObject.getString("imgCodeKey");
             String imgCode = jsonObject.getString("imgCode");
-            String cacheCode = redisTemplate.opsForValue().get(imgCodeKey);
+//            System.out.println(imgCode);
+//            System.out.println(imgCodeKey);
+            String cacheCode = redisTemplate.opsForValue().get(imgCodeKey);//获取key键对应的值。
             if (null == cacheCode) {
                 op.setMessage("error");
                 op.setResult("图片验证码已过期，请重新获取");

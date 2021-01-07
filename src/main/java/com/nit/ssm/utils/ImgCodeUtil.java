@@ -87,7 +87,6 @@ public class ImgCodeUtil {
             // 将产生的四个随机数组合在一起。
             randomCode.append(strRand);
         }
-        result.put("imgCode", randomCode.toString());
         String base64Code = "";
         try {
             //返回 base64
