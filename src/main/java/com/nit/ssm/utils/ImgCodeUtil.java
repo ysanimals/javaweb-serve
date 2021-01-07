@@ -39,9 +39,9 @@ public class ImgCodeUtil {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, width, height);*/
         // 增加下面代码使得背景透明
-        buffImg = graphics.getDeviceConfiguration().createCompatibleImage(width, height, Transparency.TRANSLUCENT);
-        graphics.dispose();
-        graphics = buffImg.createGraphics();
+//        buffImg = graphics.getDeviceConfiguration().createCompatibleImage(width, height, Transparency.TRANSLUCENT);
+//        graphics.dispose();
+//        graphics = buffImg.createGraphics();
         // 背景透明代码结束
 
         // 画图BasicStroke是JDK中提供的一个基本的画笔类,我们对他设置画笔的粗细，就可以在drawPanel上任意画出自己想要的图形了。
