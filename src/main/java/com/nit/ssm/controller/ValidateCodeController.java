@@ -25,15 +25,18 @@ public class ValidateCodeController {
     @RequestMapping(value = "/getImgCode", method = RequestMethod.GET)
     public Map<String, String> getImgCode() {
         Map<String, String> result = null;
+        Map<String, String> res = null;
         try {
             result = ImgCodeUtil.getImgCode();
             String imgCode = result.get("imgCode");
+            String base64 = result.get("data");
             UUID randomUUID = UUID.randomUUID();
             String imgCodeKey = randomUUID.toString();
             System.out.println("imgCodeKey:" + imgCodeKey);
             // 图片验证码有效时间 ：5 分钟
             redisTemplate.opsForValue().set(imgCodeKey, imgCode, 5, TimeUnit.MINUTES);//  设置变量值的过期时间
             result.put("imgCodeKey", imgCodeKey);
+            result.remove("imgCode");
         } catch (Exception e) {
             System.out.println(e.toString());
         }
