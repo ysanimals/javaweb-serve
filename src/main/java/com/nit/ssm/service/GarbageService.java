@@ -42,7 +42,7 @@ public interface GarbageService {
      * 修改垃圾信息
      * @return OpResult
      */
-    OpResultDTO update(GarbageDTO garbageDTO) throws Exception;
+    OpResultDTO update(GarbageDTO garbageDTO, MultipartFile file) throws Exception;
 
     /**
      * 删除垃圾信息

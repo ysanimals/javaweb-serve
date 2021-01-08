@@ -1,33 +1,33 @@
 Manifest-Version: 1.0
 Main-Class: com.nit.ssm.SsmApplication
-Class-Path: javassist-3.19.0-GA.jar logback-core-1.2.3.jar netty-common-
- 4.1.54.Final.jar spring-context-5.3.1.jar jakarta.el-3.0.3.jar commons-
- compiler-3.1.2.jar mysql-connector-java-8.0.22.jar spring-boot-starter-
- logging-2.4.0.jar commons-collections-3.2.1.jar spring-data-commons-2.4
- .1.jar logback-classic-1.2.3.jar HikariCP-3.4.5.jar orika-core-1.5.2.ja
- r spring-boot-starter-json-2.4.0.jar janino-3.1.2.jar spring-data-redis
- -2.4.1.jar netty-buffer-4.1.54.Final.jar netty-codec-4.1.54.Final.jar s
- pring-boot-starter-web-2.4.0.jar poi-4.1.1.jar snakeyaml-1.27.jar druid
- -1.1.15.jar log4j-api-2.13.3.jar commons-codec-1.15.jar spring-boot-sta
- rter-jdbc-2.4.0.jar spring-webmvc-5.3.1.jar lettuce-core-6.0.1.RELEASE.
- jar spring-boot-starter-tomcat-2.4.0.jar spring-boot-starter-data-redis
- -2.4.0.jar slf4j-api-1.7.30.jar mybatis-spring-boot-starter-2.1.4.jar r
- eactive-streams-1.0.3.jar spring-jcl-5.3.1.jar mybatis-spring-2.0.6.jar
-  spring-expression-5.3.1.jar netty-handler-4.1.54.Final.jar tomcat-embe
- d-websocket-9.0.39.jar commons-collections4-4.4.jar fastjson-1.2.29.jar
-  paranamer-2.8.jar log4j-to-slf4j-2.13.3.jar commons-beanutils-1.8.0.ja
- r spring-context-support-5.3.1.jar tomcat-embed-core-9.0.39.jar mybatis
- -spring-boot-autoconfigure-2.1.4.jar spring-core-5.3.1.jar spring-tx-5.
- 3.1.jar reactor-core-3.4.0.jar spring-aop-5.3.1.jar java-jwt-3.8.1.jar 
- java-sizeof-0.0.4.jar spring-boot-starter-2.4.0.jar jakarta.annotation-
- api-1.3.5.jar jackson-datatype-jdk8-2.11.3.jar jul-to-slf4j-1.7.30.jar 
- json-lib-2.4-jdk15.jar ezmorph-1.0.6.jar spring-web-5.3.1.jar spring-be
- ans-5.3.1.jar spring-jdbc-5.3.1.jar jackson-module-parameter-names-2.11
- .3.jar mybatis-3.5.6.jar spring-boot-2.4.0.jar jackson-databind-2.11.3.
- jar jackson-datatype-jsr310-2.11.3.jar commons-lang-2.5.jar commons-mat
- h3-3.6.1.jar spring-boot-autoconfigure-2.4.0.jar netty-resolver-4.1.54.
- Final.jar jackson-annotations-2.11.3.jar commons-io-2.6.jar netty-trans
- port-4.1.54.Final.jar jackson-core-2.11.3.jar spring-oxm-5.3.1.jar comm
- ons-logging-1.1.1.jar spring-data-keyvalue-2.4.1.jar concurrentlinkedha
- shmap-lru-1.4.2.jar
+Class-Path: spring-boot-starter-web-2.4.0.jar jackson-annotations-2.11.3
+ .jar json-lib-2.4-jdk15.jar netty-buffer-4.1.54.Final.jar spring-data-k
+ eyvalue-2.4.1.jar spring-jdbc-5.3.1.jar tomcat-embed-core-9.0.39.jar ja
+ ckson-datatype-jdk8-2.11.3.jar snakeyaml-1.27.jar spring-boot-starter-j
+ dbc-2.4.0.jar jackson-module-parameter-names-2.11.3.jar poi-4.1.1.jar c
+ ommons-math3-3.6.1.jar java-sizeof-0.0.4.jar jackson-datatype-jsr310-2.
+ 11.3.jar commons-io-2.6.jar HikariCP-3.4.5.jar netty-transport-4.1.54.F
+ inal.jar netty-handler-4.1.54.Final.jar spring-boot-autoconfigure-2.4.0
+ .jar mybatis-3.5.6.jar spring-beans-5.3.1.jar netty-resolver-4.1.54.Fin
+ al.jar commons-lang-2.5.jar mybatis-spring-boot-starter-2.1.4.jar fastj
+ son-1.2.29.jar commons-collections4-4.4.jar druid-1.1.15.jar commons-be
+ anutils-1.8.0.jar commons-codec-1.15.jar commons-collections-3.2.1.jar 
+ netty-codec-4.1.54.Final.jar spring-boot-starter-tomcat-2.4.0.jar java-
+ jwt-3.8.1.jar spring-jcl-5.3.1.jar spring-webmvc-5.3.1.jar jul-to-slf4j
+ -1.7.30.jar jackson-core-2.11.3.jar commons-compiler-3.1.2.jar mybatis-
+ spring-boot-autoconfigure-2.1.4.jar janino-3.1.2.jar log4j-api-2.13.3.j
+ ar paranamer-2.8.jar lettuce-core-6.0.1.RELEASE.jar jakarta.el-3.0.3.ja
+ r spring-boot-starter-2.4.0.jar spring-web-5.3.1.jar logback-core-1.2.3
+ .jar spring-tx-5.3.1.jar spring-context-support-5.3.1.jar spring-oxm-5.
+ 3.1.jar mysql-connector-java-8.0.22.jar spring-data-redis-2.4.1.jar jac
+ kson-databind-2.11.3.jar logback-classic-1.2.3.jar log4j-to-slf4j-2.13.
+ 3.jar spring-core-5.3.1.jar spring-data-commons-2.4.1.jar reactive-stre
+ ams-1.0.3.jar tomcat-embed-websocket-9.0.39.jar spring-boot-starter-dat
+ a-redis-2.4.0.jar orika-core-1.5.2.jar reactor-core-3.4.0.jar spring-co
+ ntext-5.3.1.jar commons-logging-1.1.1.jar mybatis-spring-2.0.6.jar ezmo
+ rph-1.0.6.jar spring-boot-starter-json-2.4.0.jar spring-boot-2.4.0.jar 
+ spring-aop-5.3.1.jar slf4j-api-1.7.30.jar concurrentlinkedhashmap-lru-1
+ .4.2.jar spring-boot-starter-logging-2.4.0.jar netty-common-4.1.54.Fina
+ l.jar jakarta.annotation-api-1.3.5.jar javassist-3.19.0-GA.jar spring-e
+ xpression-5.3.1.jar
 

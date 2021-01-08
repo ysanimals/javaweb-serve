@@ -114,10 +114,17 @@ public class GarbageServiceImpl implements GarbageService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public OpResultDTO update(GarbageDTO garbageDTO) throws Exception {
+    public OpResultDTO update(GarbageDTO garbageDTO, MultipartFile file) throws Exception {
         OpResultDTO op = new OpResultDTO();
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         GarbageEntity garbageEntity = mapperFactory.getMapperFacade().map(garbageDTO, GarbageEntity.class);
+        if (file != null) {
+            String originalName = file.getOriginalFilename();
+            String fileName = UUID.randomUUID().toString() + originalName.substring(originalName.lastIndexOf("."));
+            String url = UploadFileUtil.uploadFile(file, fileName);
+            garbageEntity.setOriginalName(originalName);
+            garbageEntity.setImageUrl(url);
+        }
         op.setResult(garbageMapper.update(garbageEntity));
         return op;
     }

@@ -118,16 +118,31 @@ public class GarbageController {
     }
 
 
-
     /**
-     * 修改垃圾信息
+     * 增加垃圾信息
      * @return OpResult
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public OpResultDTO update(@RequestBody GarbageDTO garbageDTO) {
+    @RequestMapping(value = "/update",method = RequestMethod.POST)//其他层抛出异常在controller中被捕获
+    public OpResultDTO update(
+            @RequestParam(value = "file",required = false)MultipartFile file,
+            @RequestParam("garbageId")Integer  garbageId,
+            @RequestParam("garbageFlag")String  garbageFlag,
+            @RequestParam("garbageName")String garbageName,
+            @RequestParam("sortId")Integer sortId){
         OpResultDTO op = new OpResultDTO();
-        try {
-            op = garbageService.update(garbageDTO);
+        try{
+            GarbageDTO garbageDTO = new GarbageDTO();
+            garbageDTO.setSortId(sortId);
+            garbageDTO.setGarbageId(garbageId);
+            garbageDTO.setGarbageName(garbageName);
+            garbageDTO.setGarbageFlag(garbageFlag);
+            if(file != null)
+            {
+                op = garbageService.update(garbageDTO,file);
+            }else{
+                op = garbageService.update(garbageDTO,null);
+            }
+
         } catch (Exception e) {
             op.setMessage("error");
             op.setResult("修改失败");
@@ -135,6 +150,25 @@ public class GarbageController {
         }
         return op;
     }
+
+
+
+    /**
+     * 修改垃圾信息
+     * @return OpResult
+     */
+//    @RequestMapping(value = "/update", method = RequestMethod.POST)
+//    public OpResultDTO update(@RequestBody GarbageDTO garbageDTO) {
+//        OpResultDTO op = new OpResultDTO();
+//        try {
+//            op = garbageService.update(garbageDTO);
+//        } catch (Exception e) {
+//            op.setMessage("error");
+//            op.setResult("修改失败");
+//            System.out.println(e.toString());
+//        }
+//        return op;
+//    }
     /**
      * 修改垃圾信息
      * @return OpResult
