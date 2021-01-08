@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
             op.setMessage("error");
             op.setResult("账户或密码错误");
         } else {
-            if (userDTO.getUserType() != 1) {
+            if (userDTO.getUserType() != 1) {//用户状态
                 op.setMessage("error");
                 op.setResult(userDTO.getUserType() == 0? "注册审核中，请耐心等待": "注册未通过，请联系管理员");
             } else {

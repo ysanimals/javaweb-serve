@@ -45,10 +45,11 @@ public class JWTUtil {
 
         return JWT.create()
                 .withClaim("seed", seed)
-                .withIssuedAt(iatDate)           // sign time
-                .withExpiresAt(expiresDate)      // expire time
+                .withIssuedAt(iatDate)           // sign time 发行时间
+                .withExpiresAt(expiresDate)      // expire time 过期时间
                 .sign(Algorithm.HMAC256(secretKey));
     }
+    //生成的token，是3段，用.连接。下面有解释。
 
     /**
      * 校验Token是否正确
